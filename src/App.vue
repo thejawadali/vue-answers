@@ -1,6 +1,7 @@
 <template>
-  <h1>Q&A App</h1>
+  <Navbar></Navbar>
 </template>
 
 <script lang="ts" setup>
+  import Navbar from "./views/Navbar.vue";
 </script>
