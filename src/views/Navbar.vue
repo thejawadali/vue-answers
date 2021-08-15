@@ -41,7 +41,7 @@
 
     <!-- Avatar -->
     <div>
-      <div id="avatar-container" class="flex items-center">
+      <div v-if="loggedIn" id="avatar-container" class="flex items-center">
         <div
           id="avatar"
           class="
@@ -109,6 +109,25 @@
           </li>
         </ul>
       </div>
+      <button
+        v-else
+        id="login-btn"
+        class="
+          flex
+          items-center
+          bg-gray-100
+          active:bg-gray-200
+          rounded-md
+          px-2
+          py-1
+          border-none
+          outline-none
+        "
+        @click="loginUserIn"
+      >
+        <login class="mr-2" />
+        Login
+      </button>
     </div>
   </nav>
 </template>
@@ -118,10 +137,12 @@ import { ref } from "vue";
 import search from "virtual:vite-icons/ion/ios-search-strong";
 import chevronDown from "virtual:vite-icons/mdi/chevron-down";
 import account from "virtual:vite-icons/mdi/account";
+import login from "virtual:vite-icons/mdi/login";
 import logout from "virtual:vite-icons/mdi/logout";
 import settings from "virtual:vite-icons/ri/settings-3-line";
 
 const open = ref(false);
+const loggedIn = ref(true);
 const dialogItems = [
   {
     title: "Profile",
@@ -144,8 +165,14 @@ const dialogItems = [
     icon: logout,
     onclick: () => {
       console.log("Clicked Logout button");
+      loggedIn.value = false;
       open.value = false;
     },
   },
 ];
+
+function loginUserIn() {
+  console.log("login");
+  loggedIn.value = true;
+}
 </script>
