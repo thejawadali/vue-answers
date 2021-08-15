@@ -17,7 +17,27 @@
     <!-- Logo -->
     <h1>Q&A</h1>
 
-  
+    <!-- search field -->
+    <div
+      class="
+        flex
+        border border-gray-200
+        justify-between
+        items-center
+        pr-2
+        pl-3
+        focus-within:shadow-md
+        py-1
+        rounded-full
+      "
+    >
+      <input
+        type="text"
+        placeholder="Search"
+        class="outline-none text-md bg-transparent w-48"
+      />
+      <search></search>
+    </div>
 
     
   </nav>
