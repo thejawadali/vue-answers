@@ -141,6 +141,8 @@ import account from "virtual:vite-icons/mdi/account";
 import login from "virtual:vite-icons/mdi/login";
 import logout from "virtual:vite-icons/mdi/logout";
 import settings from "virtual:vite-icons/ri/settings-3-line";
+import { useRouter } from "vue-router";
+const router = useRouter()
 
 const open = ref(false);
 const loggedIn = ref(true);
@@ -173,7 +175,7 @@ const dialogItems = [
 ];
 
 function loginUserIn() {
-  console.log("login");
+  router.push("/login")
   loggedIn.value = true;
 }
 </script>

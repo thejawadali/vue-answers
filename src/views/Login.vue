@@ -3,7 +3,7 @@
     <div class="container w-100 bg-white rounded-md shadow-lg">
       <h1 class="text-3xl font-bold px-3 my-3 text-center">Login</h1>
       <div class="divider border-b border-gray-500" />
-      <form action="#" class="px-8 my-8">
+      <form class="px-8 my-8">
         <input
           type="text"
           placeholder="Username"
@@ -38,6 +38,7 @@
           <a href="#" class="text-sm hover:underline">Forgot Password?</a>
         </div>
         <button
+        @click="login"
           class="
             bg-blue-500
             w-full
@@ -54,7 +55,7 @@
         </button>
         <div class="text-center my-4 text-sm">
           <p>Not Registered? 
-            <a href="#" class="text-blue-500 hover:underline">Sign up now</a>
+            <a @click="gotoRegister" class="text-blue-500 hover:underline cursor-pointer">Sign up now</a>
           </p>
         </div>
       </form>
@@ -63,7 +64,13 @@
 </template>
 
 <script lang="ts" setup>
-</script>
+  import { useRouter } from "vue-router";
 
-<style>
-</style>
+
+  const router = useRouter()
+  function gotoRegister(e:any) {
+    e.preventDefault();
+    router.push("/signup")
+  }
+
+</script>
