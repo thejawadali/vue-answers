@@ -1,23 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router"
 
 
-
-// const routes = [
-//   {
-//     path: "/",
-//     beforeEnter(to: any, from: any, next: any) {
-//       next('/login')
-//     }
-//   },
-//   {
-//     path: "/login",
-//     name: "login",
-//     component: () => import("./views/Login.vue"),
-//     meta: {
-//       layout: "full"
-//     }
-//   },
-// ]
 const routes = [
   {
     path: "/",
@@ -40,6 +23,11 @@ const routes = [
     meta: {
       layout: "full"
     }
+	},
+	{
+		path: '/dashboard',
+		name: 'Dashboard',
+		component: () => import("./views/Dashboard.vue")
 	},
 ];
 
