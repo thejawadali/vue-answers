@@ -33,6 +33,14 @@ const routes = [
       layout: "full"
     }
 	},
+	{
+		path: '/signup',
+		name: 'SignUp',
+		component: () => import("./views/Register.vue"),
+    meta: {
+      layout: "full"
+    }
+	},
 ];
 
 
