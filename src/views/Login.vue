@@ -1,7 +1,9 @@
 <template>
   <div class="bg-gray-100 flex justify-center items-center w-full h-screen">
     <div class="container w-100 bg-white rounded-md shadow-lg">
-      <h1 class="text-3xl font-bold px-3 my-3 text-center">Login</h1>
+      <h1 class="text-3xl font-bold px-3 my-3 text-center" @dblclick="jugad">
+        Login
+      </h1>
       <div class="divider border-b border-gray-500" />
       <form class="px-8 my-8">
         <input
@@ -40,7 +42,7 @@
           <a href="#" class="text-sm hover:underline">Forgot Password?</a>
         </div>
         <button
-        @click="login"
+          @click="login"
           class="
             bg-blue-500
             w-full
@@ -56,8 +58,13 @@
           Login
         </button>
         <div class="text-center my-4 text-sm">
-          <p>Not Registered? 
-            <a @click="gotoRegister" class="text-blue-500 hover:underline cursor-pointer">Sign up now</a>
+          <p>
+            Not Registered?
+            <a
+              @click="gotoRegister"
+              class="text-blue-500 hover:underline cursor-pointer"
+              >Sign up now</a
+            >
           </p>
         </div>
       </form>
@@ -66,38 +73,39 @@
 </template>
 
 <script lang="ts" setup>
-  import { reactive } from "vue-demi"
+import { reactive } from "vue-demi";
 import { useRouter } from "vue-router";
-import { userAuth } from "../store/auth"
+import { userAuth } from "../store/auth";
 
-const auth = userAuth()
+const auth = userAuth();
 
-  const user = reactive({
-    userName: '',
-    password: ''
-  })
+const user = reactive({
+  userName: "",
+  password: "",
+});
 
-  const router = useRouter()
+const router = useRouter();
 
+function login(e: any) {
+  e.preventDefault();
+  auth.login(user, (success: boolean, msg: string) => {
+    if (success) {
+      // show toast
+      console.log(msg);
+      router.push("/dashboard");
+    } else {
+      // show toast
+      console.error(msg);
+    }
+  });
+}
 
-  function login(e:any) {
-    e.preventDefault();
-    auth.login(user, (success: boolean, msg: string)=> {
-      if (success) {
-        // show toast
-        console.log(msg);
-        router.push("/dashboard")
-      }else{
-        // show toast
-        console.error(msg);
-      }
-    })
-    
-  }
-  
-  function gotoRegister(e:any) {
-    e.preventDefault();
-    router.push("/signup")
-  }
-
+function jugad() {
+  user.userName = "jawadali";
+  user.password = "123123123";
+}
+function gotoRegister(e: any) {
+  e.preventDefault();
+  router.push("/signup");
+}
 </script>

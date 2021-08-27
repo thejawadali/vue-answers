@@ -17,26 +17,27 @@ export const userAuth = defineStore({
 
   },
   actions: {
+    // user registration
     async signup(userCreds: {userName: string, password: string, name: string}, cb: (succes: boolean, msg: string) => any){
       try {
         const {data} = await axios.post("/auth/register", userCreds)
         if (data) { 
           localStorage.setItem(LS.authToken, data.token)
-          localStorage.setItem(LS.userProfile, data.user)
+          localStorage.setItem(LS.userProfile, JSON.stringify(data.user))
           cb(true, "Registered successfully")
         }
       } catch (error) {
         cb(false, error.response.data.errors[0])
       }
     },
+
+    // user login
     async login(userCreds: {userName: string, password: string}, cb: (succes: boolean, msg: string) => any){
       try {
         const { data } = await axios.post('/auth/login', userCreds)
-        localStorage.setItem(LS.authToken, data.token)
-        localStorage.setItem(LS.userProfile, JSON.stringify(data.user))
         if (data) { 
           localStorage.setItem(LS.authToken, data.token)
-          localStorage.setItem(LS.userProfile, data.user)
+          localStorage.setItem(LS.userProfile, JSON.stringify(data.user))
           cb(true, "Login successfully")
         }
       }
