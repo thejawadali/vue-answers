@@ -4,7 +4,7 @@
       bg-white
       fixed
       top-0
-      z-10
+      z-30
       right-0
       left-0
       h-14

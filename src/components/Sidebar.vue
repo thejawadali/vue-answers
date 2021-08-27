@@ -1,6 +1,15 @@
 <template>
   <div
-    class="fixed top-14 w-48 bg-gray-100 h-screen flex flex-col items-center"
+    class="
+      fixed
+      z-10
+      top-14
+      w-48
+      bg-gray-100
+      h-screen
+      flex flex-col
+      items-center
+    "
   >
     <div
       id="top"
@@ -34,7 +43,10 @@
     </ul>
 
     <div id="copyright" class="mt-1 text-xs text-center text-gray-500">
-      <p><span class="text-lg text-black">Q&A</span> <br>by <a href="#">alijamil734@gmail.com</a></p>
+      <p>
+        <span class="text-lg text-black">Q&A</span> <br />by
+        <a href="#">alijamil734@gmail.com</a>
+      </p>
     </div>
   </div>
 </template>

@@ -1,5 +1,7 @@
 <template>
   <Question
+    v-for="i in 32"
+    :key="i"
     :tags="tags"
     time="56 minutes"
     views-count="40"
