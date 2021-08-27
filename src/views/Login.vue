@@ -37,8 +37,8 @@
         <div class="text-right my-2">
           <a href="#" class="text-sm hover:underline">Forgot Password?</a>
         </div>
+        <!-- @click="login" -->
         <button
-        @click="login"
           class="
             bg-blue-500
             w-full
