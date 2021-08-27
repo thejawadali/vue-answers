@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
+import { reloadBrowser } from "../login/utils"
 
 export enum LS {
   userProfile = 'userProfile',
@@ -45,5 +46,11 @@ export const userAuth = defineStore({
         cb(false, error.response.data.errors[0])
       }
     },
+
+    // user log out
+    logout(){
+      localStorage.clear()
+      reloadBrowser('/')
+    }
   },
 })

@@ -134,7 +134,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import search from "virtual:vite-icons/ion/ios-search-strong";
 import chevronDown from "virtual:vite-icons/mdi/chevron-down";
 import account from "virtual:vite-icons/mdi/account";
@@ -142,10 +142,16 @@ import login from "virtual:vite-icons/mdi/login";
 import logout from "virtual:vite-icons/mdi/logout";
 import settings from "virtual:vite-icons/ri/settings-3-line";
 import { useRouter } from "vue-router";
-const router = useRouter()
+import { LS, userAuth } from "../store/auth";
 
+const auth = userAuth();
+const router = useRouter();
 const open = ref(false);
-const loggedIn = ref(true);
+
+const loggedIn = computed(() => {
+  return localStorage.getItem(LS.authToken);
+});
+
 const dialogItems = [
   {
     title: "Profile",
@@ -167,15 +173,16 @@ const dialogItems = [
     title: "Log out",
     icon: logout,
     onclick: () => {
-      console.log("Clicked Logout button");
       loggedIn.value = false;
+      auth.logout();
+
       open.value = false;
     },
   },
 ];
 
 function loginUserIn() {
-  router.push("/login")
+  router.push("/login");
   loggedIn.value = true;
 }
 </script>
