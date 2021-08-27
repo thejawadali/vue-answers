@@ -29,5 +29,20 @@ export const userAuth = defineStore({
         cb(false, error.response.data.errors[0])
       }
     },
+    async login(userCreds: {userName: string, password: string}, cb: (succes: boolean, msg: string) => any){
+      try {
+        const { data } = await axios.post('/auth/login', userCreds)
+        localStorage.setItem(LS.authToken, data.token)
+        localStorage.setItem(LS.userProfile, JSON.stringify(data.user))
+        if (data) { 
+          localStorage.setItem(LS.authToken, data.token)
+          localStorage.setItem(LS.userProfile, data.user)
+          cb(true, "Login successfully")
+        }
+      }
+      catch (error) {
+        cb(false, error.response.data.errors[0])
+      }
+    },
   },
 })

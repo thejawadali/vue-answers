@@ -7,6 +7,7 @@
         <input
           type="text"
           placeholder="Username"
+          v-model="user.userName"
           class="
             bg-gray-200
             w-full
@@ -22,6 +23,7 @@
         <input
           type="password"
           placeholder="Password"
+          v-model="user.password"
           class="
             bg-gray-200
             w-full
@@ -37,8 +39,8 @@
         <div class="text-right my-2">
           <a href="#" class="text-sm hover:underline">Forgot Password?</a>
         </div>
-        <!-- @click="login" -->
         <button
+        @click="login"
           class="
             bg-blue-500
             w-full
@@ -64,10 +66,35 @@
 </template>
 
 <script lang="ts" setup>
-  import { useRouter } from "vue-router";
+  import { reactive } from "vue-demi"
+import { useRouter } from "vue-router";
+import { userAuth } from "../store/auth"
 
+const auth = userAuth()
+
+  const user = reactive({
+    userName: '',
+    password: ''
+  })
 
   const router = useRouter()
+
+
+  function login(e:any) {
+    e.preventDefault();
+    auth.login(user, (success: boolean, msg: string)=> {
+      if (success) {
+        // show toast
+        console.log(msg);
+        router.push("/dashboard")
+      }else{
+        // show toast
+        console.error(msg);
+      }
+    })
+    
+  }
+  
   function gotoRegister(e:any) {
     e.preventDefault();
     router.push("/signup")

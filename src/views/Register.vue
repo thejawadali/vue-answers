@@ -108,6 +108,7 @@ import { userAuth } from "../store/auth"
     })
     
   }
+  
   function gotoRegister(e: any) {
     e.preventDefault();
     router.push("/login")
