@@ -7,6 +7,7 @@
         <input
           type="text"
           placeholder="Name"
+          v-model="user.name"
           class="
             bg-gray-200
             w-full
@@ -22,6 +23,7 @@
         <input
           type="text"
           placeholder="Username"
+          v-model="user.userName"
           class="
             bg-gray-200
             w-full
@@ -37,6 +39,7 @@
         <input
           type="password"
           placeholder="Password"
+          v-model="user.password"
           class="
             bg-gray-200
             w-full
@@ -78,11 +81,32 @@
 </template>
 
 <script lang="ts" setup>
-  import { useRouter } from "vue-router";
+  import { reactive } from "vue-demi"
+import { useRouter } from "vue-router";
+import { userAuth } from "../store/auth"
+
+  const auth = userAuth()
   const router = useRouter()
+
+  const user = reactive({
+    name: '',
+    userName: '',
+    password: ''
+  })
+
   function register(e: any) {
     e.preventDefault();
-    router.push("/dashboard")
+    auth.signup(user, (success: boolean, msg: string)=> {
+      if (success) {
+        // show toast
+        console.log(msg);
+        router.push("/dashboard")
+      }else{
+        // show toast
+        console.error(msg);
+      }
+    })
+    
   }
   function gotoRegister(e: any) {
     e.preventDefault();
