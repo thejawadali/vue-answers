@@ -8,6 +8,7 @@
       justify-center
       items-center
       text-white
+      cursor-pointer
       rounded-full
     "
   >
