@@ -16,10 +16,12 @@
     "
   >
     <!-- Logo -->
-    <h1>Q&A</h1>
+    <h1 class="text-xl font-bold cursor-pointer">Q&A</h1>
 
     <!-- search field -->
-    <div
+
+    <form
+      @submit.prevent="searchQuestion"
       class="
         flex
         border border-gray-200
@@ -33,31 +35,18 @@
       "
     >
       <input
+      v-model="search"
         type="text"
         placeholder="Search"
-        class="outline-none text-md bg-transparent w-48"
+        class="outline-none text-md bg-transparent w-80"
       />
-      <search></search>
-    </div>
+      <search-icon></search-icon>
+    </form>
 
     <!-- Avatar -->
     <div>
       <div v-if="loggedIn" id="avatar-container" class="flex items-center">
-        <div
-          id="avatar"
-          class="
-            bg-blue-500
-            w-7
-            h-7
-            flex
-            justify-center
-            items-center
-            text-white
-            rounded-full
-          "
-        >
-          <p class="text-lg">A</p>
-        </div>
+        <base-avatar title="K"/>
         <p id="name" class="px-2 text-sm">Jawad Ali</p>
         <chevron-down
           @click="open = !open"
@@ -135,7 +124,7 @@
 
 <script lang="ts" setup>
 import { computed, ref } from "vue";
-import search from "virtual:vite-icons/ion/ios-search-strong";
+import searchIcon from "virtual:vite-icons/ion/ios-search-strong";
 import chevronDown from "virtual:vite-icons/mdi/chevron-down";
 import account from "virtual:vite-icons/mdi/account";
 import login from "virtual:vite-icons/mdi/login";
@@ -143,10 +132,12 @@ import logout from "virtual:vite-icons/mdi/logout";
 import settings from "virtual:vite-icons/ri/settings-3-line";
 import { useRouter } from "vue-router";
 import { LS, userAuth } from "../store/auth";
+import BaseAvatar from "../components/Base/BaseAvatar.vue";
 
 const auth = userAuth();
 const router = useRouter();
 const open = ref(false);
+const search = ref('')
 
 const loggedIn = computed(() => {
   return localStorage.getItem(LS.authToken);
@@ -181,8 +172,13 @@ const dialogItems = [
   },
 ];
 
+function searchQuestion() {
+  console.log(`search field is ${search.value}`);
+  search.value = ''
+  
+}
+
 function loginUserIn() {
   router.push("/login");
-  loggedIn.value = true;
 }
 </script>
