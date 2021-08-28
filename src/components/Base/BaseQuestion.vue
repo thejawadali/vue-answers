@@ -37,9 +37,9 @@
 </template>
 
 <script setup lang="ts">
-  import CategoryFlag from "./Base/BaseCategoryFlag.vue";
-import BaseAvatar from "./Base/BaseAvatar.vue";
-import BaseCounter from "./Base/BaseCounter.vue";
+  import CategoryFlag from "./BaseCategoryFlag.vue";
+import BaseAvatar from "./BaseAvatar.vue";
+import BaseCounter from "./BaseCounter.vue";
 
 const props = defineProps({
   tags: Array,

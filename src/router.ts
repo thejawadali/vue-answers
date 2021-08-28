@@ -10,7 +10,7 @@ const routes = [
         next("/login")
         return
       }
-      next("/dashboard")
+      next("/questions")
     }
   },
 	{
@@ -30,9 +30,9 @@ const routes = [
     }
 	},
 	{
-		path: '/dashboard',
-		name: 'Dashboard',
-		component: () => import("./views/Dashboard.vue")
+		path: '/questions',
+		name: 'Questions',
+		component: () => import("./views/Questions.vue")
 	},
 ];
 

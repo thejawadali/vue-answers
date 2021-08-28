@@ -13,10 +13,9 @@
           overflow-scroll
           absolute
           left-0
-          lg:left-52
+          lg:left-48
           right-0
-          pb-12
-          p-4
+          
         "
       >
         <router-view />
