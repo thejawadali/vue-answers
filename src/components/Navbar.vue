@@ -35,7 +35,7 @@
       "
     >
       <input
-      v-model="search"
+        v-model="search"
         type="text"
         placeholder="Search"
         class="outline-none text-md bg-transparent w-80"
@@ -46,8 +46,8 @@
     <!-- Avatar -->
     <div>
       <div v-if="loggedIn" id="avatar-container" class="flex items-center">
-        <base-avatar title="K"/>
-        <p id="name" class="px-2 text-sm">Jawad Ali</p>
+        <base-avatar :title="getFirstLetterOfName(nameOfUser)" />
+        <p id="name" class="px-2 text-sm">{{ nameOfUser }}</p>
         <chevron-down
           @click="open = !open"
           class="cursor-pointer hover:bg-gray-200 rounded-full"
@@ -123,7 +123,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import searchIcon from "virtual:vite-icons/ion/ios-search-strong";
 import chevronDown from "virtual:vite-icons/mdi/chevron-down";
 import account from "virtual:vite-icons/mdi/account";
@@ -133,15 +133,20 @@ import settings from "virtual:vite-icons/ri/settings-3-line";
 import { useRouter } from "vue-router";
 import { LS, userAuth } from "../store/auth";
 import BaseAvatar from "../components/Base/BaseAvatar.vue";
+import { getFirstLetterOfName } from "../logic/utils";
 
 const auth = userAuth();
 const router = useRouter();
 const open = ref(false);
-const search = ref('')
+const search = ref("");
 
 const loggedIn = computed(() => {
   return localStorage.getItem(LS.authToken);
 });
+
+const nameOfUser = JSON.parse(
+  localStorage.getItem(LS.userProfile) as string
+).name;
 
 const dialogItems = [
   {
@@ -174,8 +179,7 @@ const dialogItems = [
 
 function searchQuestion() {
   console.log(`search field is ${search.value}`);
-  search.value = ''
-  
+  search.value = "";
 }
 
 function loginUserIn() {
