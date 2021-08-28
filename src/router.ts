@@ -15,7 +15,7 @@ const routes = [
   },
 	{
 		path: '/login',
-		name: 'Login',
+		name: 'login',
 		component: () => import("./views/Login.vue"),
     meta: {
       layout: "full"
@@ -23,7 +23,7 @@ const routes = [
 	},
 	{
 		path: '/signup',
-		name: 'SignUp',
+		name: 'sign-up',
 		component: () => import("./views/Register.vue"),
     meta: {
       layout: "full"
@@ -31,8 +31,13 @@ const routes = [
 	},
 	{
 		path: '/questions',
-		name: 'Questions',
+		name: 'questions',
 		component: () => import("./views/Questions.vue")
+	},
+	{
+		path: '/questions/:_id',
+		name: 'questions-details',
+		component: () => import("./views/QuestionDetails.vue")
 	},
 ];
 

@@ -46,13 +46,8 @@
       <base-question
         v-for="question in questions"
         :key="question._id"
-        :title="question.title"
-        :details="question.details"
-        :tags="question.tags.map((t) => t.title)"
-        :time="timeDifference(question.createdAt)"
-        :views-count="question.views"
-        :answers-count="question.answers.length"
-        :avatar-letter="getFirstLetterOfName(question.user.name)"
+        @click="loadQuestion(question._id)"
+        :question="question"
       />
     </div>
     <div v-else>
@@ -63,10 +58,10 @@
 
 <script lang="ts" setup>
 import { onMounted, ref } from "vue-demi";
-import { getFirstLetterOfName, timeDifference } from "../logic/utils";
 import BaseQuestion from "../components/Base/BaseQuestion.vue";
 import { questionStore } from "../store/question";
 import { tagsStore } from "../store/tag";
+import { useRouter } from "vue-router";
 
 interface IQuestion {
   _id: any;
@@ -85,6 +80,8 @@ interface ITag {
 
 const quesStore = questionStore();
 const tagStore = tagsStore();
+const router = useRouter();
+
 const questions = ref([] as IQuestion[]);
 const fetchedQuestion = ref([] as IQuestion[]);
 const tags = ref([] as ITag[]);
@@ -104,6 +101,10 @@ function applyFilter() {
     }
   });
   console.log(selectedTag.value);
+}
+
+function loadQuestion(id: string) {
+  router.push(`/questions/${id}`);
 }
 
 onMounted(() => {
