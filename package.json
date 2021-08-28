@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
+    "dayjs": "^1.10.6",
     "pinia": "^2.0.0-rc.6",
     "vue": "^3.2.6",
     "vue-router": "^4.0.11"

@@ -11,7 +11,7 @@
         <!-- avatar -->
         <base-avatar :title="avatarLetter" />
         <!-- time -->
-        <p class="mx-2 text-sm text-gray-500">Asked {{ time }} ago</p>
+        <p class="mx-2 text-sm text-gray-500">Asked {{ time }}</p>
         <div v-for="(tag, index) in tags" :key="index" class="mx-2">
           <category-flag>{{ tag }}</category-flag>
         </div>

@@ -1,8 +1,8 @@
 Arguments: 
-  /Users/jawadali/.nvm/versions/node/v14.17.0/bin/node /Users/jawadali/.nvm/versions/node/v14.17.0/bin/yarn add -D @types/vuex
+  /Users/jawadali/.nvm/versions/node/v14.17.0/bin/node /Users/jawadali/.nvm/versions/node/v14.17.0/bin/yarn add -D @types/dyajs
 
 PATH: 
-  /Users/jawadali/.nvm/versions/node/v14.17.0/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Users/jawadali/.nvm/versions/node/v14.17.0/bin
+  /Users/jawadali/.nvm/versions/node/v14.17.0/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Users/jawadali/.nvm/versions/node/v14.17.0/bin:/Users/jawadali/.fig/bin
 
 Yarn version: 
   1.22.10
@@ -14,7 +14,7 @@ Platform:
   darwin x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@types%2fvuex: Not found
+  Error: https://registry.yarnpkg.com/@types%2fdyajs: Not found
       at Request.params.callback [as _callback] (/Users/jawadali/.nvm/versions/node/v14.17.0/lib/node_modules/yarn/lib/cli.js:66988:18)
       at Request.self.callback (/Users/jawadali/.nvm/versions/node/v14.17.0/lib/node_modules/yarn/lib/cli.js:140662:22)
       at Request.emit (events.js:376:20)
@@ -37,9 +37,10 @@ npm manifest:
     },
     "dependencies": {
       "axios": "^0.21.1",
-      "vue": "^3.0.5",
-      "vue-router": "^4.0.11",
-      "vuex": "^3.6.2"
+      "dayjs": "^1.10.6",
+      "pinia": "^2.0.0-rc.6",
+      "vue": "^3.2.6",
+      "vue-router": "^4.0.11"
     },
     "devDependencies": {
       "@iconify/json": "^1.1.387",
@@ -90,7 +91,12 @@ Lockfile:
     resolved "https://registry.npmjs.org/@babel/parser/-/parser-7.15.2.tgz"
     integrity sha512-bMJXql1Ss8lFnvr11TZDH4ArtwlAS5NG9qBmdiFW2UHHm6MVoR+GDc5XE2b9K938cyjc9O6/+vjjcffLDtfuDg==
   
-  "@babel/types@^7.12.0", "@babel/types@^7.13.0", "@babel/types@^7.6.1", "@babel/types@^7.9.6":
+  "@babel/parser@^7.15.0":
+    version "7.15.3"
+    resolved "https://registry.yarnpkg.com/@babel/parser/-/parser-7.15.3.tgz#3416d9bea748052cfcb63dbcc27368105b1ed862"
+    integrity sha512-O0L6v/HvqbdJawj0iBEfVQMc3/6WP+AeOsovsIgBFyJaG+W2w7eqvZB7puddATmWuARlm1SX7DwxJ/JJUnDpEA==
+  
+  "@babel/types@^7.12.0", "@babel/types@^7.13.0", "@babel/types@^7.15.0", "@babel/types@^7.6.1", "@babel/types@^7.9.6":
     version "7.15.0"
     resolved "https://registry.npmjs.org/@babel/types/-/types-7.15.0.tgz"
     integrity sha512-OBvfqnllOIdX4ojTHpwZbpvz4j3EWyjkZEdmjH0/cgsd6QOdSgU8rLSk6ard/pcW7rlmjdVSX/AWOaORR1uNOQ==
@@ -232,6 +238,17 @@ Lockfile:
       estree-walker "^2.0.1"
       source-map "^0.6.1"
   
+  "@vue/compiler-core@3.2.6":
+    version "3.2.6"
+    resolved "https://registry.yarnpkg.com/@vue/compiler-core/-/compiler-core-3.2.6.tgz#7162bb0670273f04566af0d353009187ab577915"
+    integrity sha512-vbwnz7+OhtLO5p5i630fTuQCL+MlUpEMTKHuX+RfetQ+3pFCkItt2JUH+9yMaBG2Hkz6av+T9mwN/acvtIwpbw==
+    dependencies:
+      "@babel/parser" "^7.15.0"
+      "@babel/types" "^7.15.0"
+      "@vue/shared" "3.2.6"
+      estree-walker "^2.0.2"
+      source-map "^0.6.1"
+  
   "@vue/compiler-dom@3.1.5":
     version "3.1.5"
     resolved "https://registry.npmjs.org/@vue/compiler-dom/-/compiler-dom-3.1.5.tgz"
@@ -247,6 +264,14 @@ Lockfile:
     dependencies:
       "@vue/compiler-core" "3.2.0-beta.8"
       "@vue/shared" "3.2.0-beta.8"
+  
+  "@vue/compiler-dom@3.2.6":
+    version "3.2.6"
+    resolved "https://registry.yarnpkg.com/@vue/compiler-dom/-/compiler-dom-3.2.6.tgz#3764d7fe1a696e39fb2a3c9d638da0749e369b2d"
+    integrity sha512-+a/3oBAzFIXhHt8L5IHJOTP4a5egzvpXYyi13jR7CUYOR1S+Zzv7vBWKYBnKyJLwnrxTZnTQVjeHCgJq743XKg==
+    dependencies:
+      "@vue/compiler-core" "3.2.6"
+      "@vue/shared" "3.2.6"
   
   "@vue/compiler-sfc@^3.0.5":
     version "3.1.5"
@@ -310,17 +335,17 @@ Lockfile:
       "@vue/compiler-dom" "3.2.0-beta.8"
       "@vue/shared" "3.2.0-beta.8"
   
-  "@vue/devtools-api@^6.0.0-beta.14":
+  "@vue/devtools-api@^6.0.0-beta.14", "@vue/devtools-api@^6.0.0-beta.15":
     version "6.0.0-beta.15"
     resolved "https://registry.yarnpkg.com/@vue/devtools-api/-/devtools-api-6.0.0-beta.15.tgz#ad7cb384e062f165bcf9c83732125bffbc2ad83d"
     integrity sha512-quBx4Jjpexo6KDiNUGFr/zF/2A4srKM9S9v2uHgMXSU//hjgq1eGzqkIFql8T9gfX5ZaVOUzYBP3jIdIR3PKIA==
   
-  "@vue/reactivity@3.1.5":
-    version "3.1.5"
-    resolved "https://registry.npmjs.org/@vue/reactivity/-/reactivity-3.1.5.tgz"
-    integrity sha512-1tdfLmNjWG6t/CsPldh+foumYFo3cpyCHgBYQ34ylaMsJ+SNHQ1kApMIa8jN+i593zQuaw3AdWH0nJTARzCFhg==
+  "@vue/reactivity@3.2.6":
+    version "3.2.6"
+    resolved "https://registry.yarnpkg.com/@vue/reactivity/-/reactivity-3.2.6.tgz#b8993fa6f48545178e588e25a9c9431a1c1b7d50"
+    integrity sha512-8vIDD2wpCnYisNNZjmcIj+Rixn0uhZNY3G1vzlgdVdLygeRSuFjkmnZk6WwvGzUWpKfnG0e/NUySM3mVi59hAA==
     dependencies:
-      "@vue/shared" "3.1.5"
+      "@vue/shared" "3.2.6"
   
   "@vue/reactivity@^3.2.0-beta.5":
     version "3.2.0-beta.8"
@@ -329,21 +354,21 @@ Lockfile:
     dependencies:
       "@vue/shared" "3.2.0-beta.8"
   
-  "@vue/runtime-core@3.1.5":
-    version "3.1.5"
-    resolved "https://registry.npmjs.org/@vue/runtime-core/-/runtime-core-3.1.5.tgz"
-    integrity sha512-YQbG5cBktN1RowQDKA22itmvQ+b40f0WgQ6CXK4VYoYICAiAfu6Cc14777ve8zp1rJRGtk5oIeS149TOculrTg==
+  "@vue/runtime-core@3.2.6":
+    version "3.2.6"
+    resolved "https://registry.yarnpkg.com/@vue/runtime-core/-/runtime-core-3.2.6.tgz#376baeef7fe02a62377d46d0d0a8ab9510db1d8e"
+    integrity sha512-3mqtgpj/YSGFxtvTufSERRApo92B16JNNxz9p+5eG6PPuqTmuRJz214MqhKBEgLEAIQ6R6YCbd83ZDtjQnyw2g==
     dependencies:
-      "@vue/reactivity" "3.1.5"
-      "@vue/shared" "3.1.5"
+      "@vue/reactivity" "3.2.6"
+      "@vue/shared" "3.2.6"
   
-  "@vue/runtime-dom@3.1.5":
-    version "3.1.5"
-    resolved "https://registry.npmjs.org/@vue/runtime-dom/-/runtime-dom-3.1.5.tgz"
-    integrity sha512-tNcf3JhVR0RfW0kw1p8xZgv30nvX8Y9rsz7eiQ0dHe273sfoCngAG0y4GvMaY4Xd8FsjUwFedd4suQ8Lu8meXg==
+  "@vue/runtime-dom@3.2.6":
+    version "3.2.6"
+    resolved "https://registry.yarnpkg.com/@vue/runtime-dom/-/runtime-dom-3.2.6.tgz#0f74dbca84d56c222fbfbd53415b260386859a3b"
+    integrity sha512-fq33urnP0BNCGm2O3KCzkJlKIHI80C94HJ4qDZbjsTtxyOn5IHqwKSqXVN3RQvO6epcQH+sWS+JNwcNDPzoasg==
     dependencies:
-      "@vue/runtime-core" "3.1.5"
-      "@vue/shared" "3.1.5"
+      "@vue/runtime-core" "3.2.6"
+      "@vue/shared" "3.2.6"
       csstype "^2.6.8"
   
   "@vue/shared@3.1.5":
@@ -355,6 +380,11 @@ Lockfile:
     version "3.2.0-beta.8"
     resolved "https://registry.npmjs.org/@vue/shared/-/shared-3.2.0-beta.8.tgz"
     integrity sha512-+9azBIVNUvrUDyvUk/0/yp0FZ4RjAWfZf0CSrpgt+y3Pn4tj4qtUChvEgZ4pO2F6vQ3wGliUjh9YydVlYGgmCg==
+  
+  "@vue/shared@3.2.6":
+    version "3.2.6"
+    resolved "https://registry.yarnpkg.com/@vue/shared/-/shared-3.2.6.tgz#2c22bae88fe2b7b59fa68a9c9c4cd60bae2c1794"
+    integrity sha512-uwX0Qs2e6kdF+WmxwuxJxOnKs/wEkMArtYpHSm7W+VY/23Tl8syMRyjnzEeXrNCAP0/8HZxEGkHJsjPEDNRuHw==
   
   "@vue/shared@^3.2.0-beta.5":
     version "3.2.0-beta.5"
@@ -649,8 +679,13 @@ Lockfile:
   
   csstype@^2.6.8:
     version "2.6.17"
-    resolved "https://registry.npmjs.org/csstype/-/csstype-2.6.17.tgz"
+    resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.6.17.tgz#4cf30eb87e1d1a005d8b6510f95292413f6a1c0e"
     integrity sha512-u1wmTI1jJGzCJzWndZo8mk4wnPTZd1eOIYTYvuEyOQGfmDl3TrabCCfKnOC86FZwW/9djqTl933UF/cS425i9A==
+  
+  dayjs@^1.10.6:
+    version "1.10.6"
+    resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.10.6.tgz#288b2aa82f2d8418a6c9d4df5898c0737ad02a63"
+    integrity sha512-AztC/IOW4L1Q41A86phW5Thhcrco3xuAA+YX/BLpLWWjRcTj5TOt/QImBLmCKlrF7u7k47arTnOyL6GnbG8Hvw==
   
   defined@^1.0.0:
     version "1.0.0"
@@ -756,7 +791,7 @@ Lockfile:
     resolved "https://registry.npmjs.org/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz"
     integrity sha1-G2HAViGQqN/2rjuyzwIAyhMLhtQ=
   
-  estree-walker@^2.0.1:
+  estree-walker@^2.0.1, estree-walker@^2.0.2:
     version "2.0.2"
     resolved "https://registry.npmjs.org/estree-walker/-/estree-walker-2.0.2.tgz"
     integrity sha512-Rfkk/Mp/DL7JVje3u18FxFujQlTNR2q6QfMSMB7AvCBx91NGj/ba3kCfza0f6dVDbw7YlRf/nDrn7pQrCCyQ/w==
@@ -1242,6 +1277,14 @@ Lockfile:
     version "2.3.0"
     resolved "https://registry.npmjs.org/picomatch/-/picomatch-2.3.0.tgz"
     integrity sha512-lY1Q/PiJGC2zOv/z391WOTD+Z02bCgsFfvxoXXf6h7kv9o+WmsmzYqrAwY63sNgOxE4xEdq0WyUnXfKeBrSvYw==
+  
+  pinia@^2.0.0-rc.6:
+    version "2.0.0-rc.6"
+    resolved "https://registry.yarnpkg.com/pinia/-/pinia-2.0.0-rc.6.tgz#f83b7f2a62710715487574d6f442aa879961122b"
+    integrity sha512-IqArmLmWJB5wZzELZfFF42bMaulo6cjMvL1wgUjWfmzaGCt1HYOAXN86s6HrdAueeEWj9Ov6lNNOHB1DFQxthw==
+    dependencies:
+      "@vue/devtools-api" "^6.0.0-beta.15"
+      vue-demi "*"
   
   postcss-js@^3.0.3:
     version "3.0.3"
@@ -1824,6 +1867,11 @@ Lockfile:
       vscode-pug-languageservice "^0.26.14"
       vscode-typescript-languageservice "^0.26.14"
   
+  vue-demi@*:
+    version "0.11.3"
+    resolved "https://registry.yarnpkg.com/vue-demi/-/vue-demi-0.11.3.tgz#dd7495b92b495ecfa35675bf024b1358a7add150"
+    integrity sha512-DpM0TTMpclRZDV6AIacgg837zrim/C9Zn+2ztXBs9hsESJN9vC83ztjTe4KC4HgJuVle8YUjPp7HTwWtwOHfmg==
+  
   vue-router@^4.0.11:
     version "4.0.11"
     resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-4.0.11.tgz#cd649a0941c635281763a20965b599643ddc68ed"
@@ -1843,19 +1891,14 @@ Lockfile:
     dependencies:
       vscode-vue-languageservice "^0.26.6"
   
-  vue@^3.0.5:
-    version "3.1.5"
-    resolved "https://registry.npmjs.org/vue/-/vue-3.1.5.tgz"
-    integrity sha512-Ho7HNb1nfDoO+HVb6qYZgeaobt1XbY6KXFe4HGs1b9X6RhkWG/113n4/SrtM1LUclM6OrP/Se5aPHHvAPG1iVQ==
+  vue@^3.2.6:
+    version "3.2.6"
+    resolved "https://registry.yarnpkg.com/vue/-/vue-3.2.6.tgz#c71445078751f458648fd8fb3a2da975507d03d2"
+    integrity sha512-Zlb3LMemQS3Xxa6xPsecu45bNjr1hxO8Bh5FUmE0Dr6Ot0znZBKiM47rK6O7FTcakxOnvVN+NTXWJF6u8ajpCQ==
     dependencies:
-      "@vue/compiler-dom" "3.1.5"
-      "@vue/runtime-dom" "3.1.5"
-      "@vue/shared" "3.1.5"
-  
-  vuex@^3.6.2:
-    version "3.6.2"
-    resolved "https://registry.yarnpkg.com/vuex/-/vuex-3.6.2.tgz#236bc086a870c3ae79946f107f16de59d5895e71"
-    integrity sha512-ETW44IqCgBpVomy520DT5jf8n0zoCac+sxWnn+hMe/CzaSejb/eVw2YToiXYX+Ex/AuHHia28vWTq4goAexFbw==
+      "@vue/compiler-dom" "3.2.6"
+      "@vue/runtime-dom" "3.2.6"
+      "@vue/shared" "3.2.6"
   
   with@^7.0.0:
     version "7.0.2"

@@ -6,7 +6,7 @@
       :title="question.title"
       :details="question.details"
       :tags="question.tags.map((t) => t.title)"
-      time="56 minutes"
+      :time="timeDifference(question.createdAt)"
       :views-count="question.views"
       :answers-count="question.answers.length"
       :avatar-letter="getFirstLetterOfName(question.user.name)"
@@ -19,9 +19,10 @@
 
 <script lang="ts" setup>
 import { onMounted, ref } from "vue-demi";
-import { getFirstLetterOfName } from "../logic/utils";
+import { getFirstLetterOfName, timeDifference } from "../logic/utils";
 import Question from "../components/Question.vue";
 import { questionStore } from "../store/question";
+
 
 const store = questionStore();
 const questions = ref([] as any);
