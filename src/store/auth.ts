@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
-import { reloadBrowser } from "../login/utils"
+import { reloadBrowser } from "../logic/utils"
 
 export enum LS {
   userProfile = 'userProfile',
@@ -12,7 +12,6 @@ axios.defaults.baseURL = 'http://localhost:3000'
 export const userAuth = defineStore({
   id: 'Auth',
   state: () => ({
-    myName: 'Jawad Ali',
   }),
   getters: {
 

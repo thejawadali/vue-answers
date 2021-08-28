@@ -47,7 +47,7 @@ const props = defineProps({
   avatarLetter: String,
   details: String,
   title: String,
-  viewsCount: String,
-  answersCount: String
+  viewsCount: Number,
+  answersCount: Number
 });
 </script>

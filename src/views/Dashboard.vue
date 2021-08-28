@@ -1,25 +1,38 @@
 <template>
-  <Question
-    v-for="i in 32"
-    :key="i"
-    :tags="tags"
-    time="56 minutes"
-    views-count="40"
-    answers-count="33"
-    avatar-letter="D"
-    title="How to become billionaire in next four years?"
-    :details="questionDetails"
-  ></Question>
+  <div v-if="questions.length > 0">
+    <Question
+      v-for="question in questions"
+      :key="question._id"
+      :title="question.title"
+      :details="question.details"
+      :tags="question.tags.map((t) => t.title)"
+      time="56 minutes"
+      :views-count="question.views"
+      :answers-count="question.answers.length"
+      :avatar-letter="getFirstLetterOfName(question.user.name)"
+    />
+  </div>
+  <div v-else>
+    <h3>No Question Found</h3>
+  </div>
 </template>
 
 <script lang="ts" setup>
+import { onMounted, ref } from "vue-demi";
+import { getFirstLetterOfName } from "../logic/utils";
 import Question from "../components/Question.vue";
-const tags = ["Computer Science", "Chemistry", "Physics", "Maths"];
-const questionDetails = `Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolore itaque
-        laudantium repudiandae ut voluptatibus praesentium mollitia omnis
-        aperiam odio voluptatum quibusdam eos, consequatur cum odit sunt
-        exercitationem animi optio similique maiores excepturi quis qui repellat
-        sapiente. Odit unde nulla maxime a, soluta necessitatibus cupiditate
-        corporis numquam aut esse molestias veniam explicabo consequuntur enim
-        magni recusandae?`;
+import { questionStore } from "../store/question";
+
+const store = questionStore();
+const questions = ref([] as any);
+
+onMounted(() => {
+  store.fetchQuestions((success: boolean, msg: string) => {
+    if (!success) {
+      console.error(msg);
+      return;
+    }
+    questions.value = JSON.parse(msg);
+  });
+});
 </script>
