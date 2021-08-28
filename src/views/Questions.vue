@@ -68,15 +68,41 @@ import BaseQuestion from "../components/Base/BaseQuestion.vue";
 import { questionStore } from "../store/question";
 import { tagsStore } from "../store/tag";
 
+interface IQuestion {
+  _id: any;
+  title: string;
+  details: string;
+  views: number;
+  tags: any;
+  user: any;
+  answers: any;
+}
+
+interface ITag {
+  _id: any;
+  title: string;
+}
+
 const quesStore = questionStore();
 const tagStore = tagsStore();
-const questions = ref([] as any);
-const tags = ref([] as any);
+const questions = ref([] as IQuestion[]);
+const fetchedQuestion = ref([] as IQuestion[]);
+const tags = ref([] as ITag[]);
 
 const selectedTag = ref("");
 
 function applyFilter() {
-  if (!selectedTag.value) return;
+  if (!selectedTag.value) {
+    questions.value = fetchedQuestion.value;
+    return;
+  }
+  questions.value = fetchedQuestion.value.filter((ques: IQuestion) => {
+    if (
+      ques.tags.find((tag: ITag) => tag._id.toString() === selectedTag.value)
+    ) {
+      return ques;
+    }
+  });
   console.log(selectedTag.value);
 }
 
@@ -86,7 +112,8 @@ onMounted(() => {
       console.error(msg);
       return;
     }
-    questions.value = JSON.parse(msg);
+    fetchedQuestion.value = JSON.parse(msg);
+    questions.value = fetchedQuestion.value;
   });
 
   tagStore.fetchTags((success: boolean, msg: string) => {
