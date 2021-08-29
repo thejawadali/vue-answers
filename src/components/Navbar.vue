@@ -134,6 +134,7 @@ import { useRouter } from "vue-router";
 import { LS, userAuth } from "../store/auth";
 import BaseAvatar from "../components/Base/BaseAvatar.vue";
 import { getFirstLetterOfName } from "../logic/utils";
+import { questionStore } from "../store/question"
 
 const auth = userAuth();
 const router = useRouter();
@@ -178,8 +179,8 @@ const dialogItems = [
 ];
 
 function searchQuestion() {
-  console.log(`search field is ${search.value}`);
-  search.value = "";
+  // console.log(`search field is ${search.value}`);
+  questionStore().searchQuestion(search.value)
 }
 
 function loginUserIn() {

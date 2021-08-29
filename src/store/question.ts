@@ -3,12 +3,28 @@ import axios from 'axios'
 import { LS } from "./auth"
 
 
+interface IQuestion {
+  _id: any
+  title: string
+  details: string
+  views: number
+  tags: any
+  user: any
+  answers: any
+}
+
+interface ITag {
+  _id: any
+  title: string
+}
 
 axios.defaults.baseURL = 'http://localhost:3000'
 
 export const questionStore = defineStore({
   id: 'Question',
   state: () => ({
+    questions: [] as IQuestion[],
+    questionsFromDb: [] as IQuestion[]
   }),
   getters: {
 
@@ -19,7 +35,9 @@ export const questionStore = defineStore({
       try {
         const { data } = await axios.get("/question")
         if (data) {
-          cb(true, JSON.stringify(data))
+          this.questionsFromDb = data
+          this.questions = data
+          cb(true, "Loaded successfully")
         }
       } catch (error) {
         cb(false, error.response.data.errors[0])
@@ -51,5 +69,40 @@ export const questionStore = defineStore({
         cb(false, error.response.data.errors[0])
       }
     },
+
+    removeCategoryFilter() {
+      this.questions = this.questionsFromDb
+    },
+
+    applyCategoryFilter(selectedTag: string) {
+      this.questions = this.questionsFromDb.filter((ques: IQuestion) => {
+        if (ques.tags.find((tag: ITag) => tag._id.toString() === selectedTag)) {
+          return ques
+        }
+      })
+    },
+
+    searchQuestion(search: string) {
+      if (!search) {
+        this.questions = this.questionsFromDb
+        return
+      }
+      this.questions = this.questionsFromDb.filter((ques: IQuestion) => ques.title.includes(search))
+    }
   },
 })
+
+// function applyFilter() {
+//   if (!selectedTag.value) {
+//     questions.value = quesStore.questions
+//     return;
+//   }
+//   questions.value = quesStore.questions.filter((ques: IQuestion) => {
+//     if (
+//       ques.tags.find((tag: ITag) => tag._id.toString() === selectedTag.value)
+//     ) {
+//       return ques;
+//     }
+//   });
+//   console.log(selectedTag.value);
+// }

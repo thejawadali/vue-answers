@@ -46,7 +46,7 @@
       <base-question
         v-for="question in questions"
         :key="question._id"
-        @click="loadQuestion(question._id)"
+        @click="router.push(`/questions/${question._id}`)"
         :question="question"
       />
     </div>
@@ -57,7 +57,7 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, ref } from "vue-demi";
+import { computed, onMounted, ref } from "vue-demi";
 import BaseQuestion from "../components/Base/BaseQuestion.vue";
 import { questionStore } from "../store/question";
 import { tagsStore } from "../store/tag";
@@ -82,41 +82,33 @@ const quesStore = questionStore();
 const tagStore = tagsStore();
 const router = useRouter();
 
-const questions = ref([] as IQuestion[]);
-const fetchedQuestion = ref([] as IQuestion[]);
 const tags = ref([] as ITag[]);
 
 const selectedTag = ref("");
 
 function applyFilter() {
   if (!selectedTag.value) {
-    questions.value = fetchedQuestion.value;
+    quesStore.removeCategoryFilter()
     return;
   }
-  questions.value = fetchedQuestion.value.filter((ques: IQuestion) => {
-    if (
-      ques.tags.find((tag: ITag) => tag._id.toString() === selectedTag.value)
-    ) {
-      return ques;
-    }
-  });
-  console.log(selectedTag.value);
+  quesStore.applyCategoryFilter(selectedTag.value)
+  
 }
 
-function loadQuestion(id: string) {
-  router.push(`/questions/${id}`);
-}
+const questions = computed(()=>{
+  return quesStore.questions
+})
 
+// Fetch data from db
 onMounted(() => {
   quesStore.fetchQuestions((success: boolean, msg: string) => {
     if (!success) {
       console.error(msg);
       return;
     }
-    fetchedQuestion.value = JSON.parse(msg);
-    questions.value = fetchedQuestion.value;
   });
 
+  // Get all tags form db
   tagStore.fetchTags((success: boolean, msg: string) => {
     if (!success) {
       console.error(msg);
