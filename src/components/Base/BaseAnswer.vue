@@ -20,7 +20,7 @@
         </p>
       </div>
       <!-- Details -->
-      <p class="text-sm my-2">
+      <p class="text-sm my-2 whitespace-pre-line">
         {{answer.details}}
       </p>
     </div>

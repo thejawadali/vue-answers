@@ -50,7 +50,7 @@
         <base-answer :answer="ans" />
       </div>
       <!-- Add Answer -->
-      <form @submit.prevent="addAnswer" class="flex">
+      <form @submit.prevent="addAnswer" class="flex my-10">
         <!-- avatar -->
         <div class="mt-3">
           <base-avatar
@@ -107,8 +107,9 @@ import { useRoute } from "vue-router";
 import { computed, onMounted, ref } from "vue-demi";
 import { questionStore } from "../store/question";
 import dayjs from "dayjs";
-import { getFirstLetterOfName } from "../logic/utils";
+import { getFirstLetterOfName, reloadBrowser } from "../logic/utils";
 import { isEmpty } from "lodash";
+import { LS } from "../store/auth";
 
 const route = useRoute();
 const qStore = questionStore();
@@ -129,7 +130,19 @@ function getQuestion() {
 }
 
 function addAnswer() {
-  console.log(answerDetails.value);
+  if (localStorage.getItem(LS.authToken)) {
+    const details = answerDetails.value
+    qStore.addAnswer(details, route.params.questionId as string, (success: boolean, msg: string)=> {
+      if (!success) {
+        console.error(msg);
+        return
+      }
+      console.log(msg);
+      reloadBrowser()
+    })
+  } else {
+    console.error("Login First");
+  }
 }
 
 onMounted(() => {
