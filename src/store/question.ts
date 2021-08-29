@@ -70,6 +70,25 @@ export const questionStore = defineStore({
       }
     },
 
+    async addQuestion(question: any, cb: (success: boolean, msg: string) => any) {
+      try {
+        const tags : any [] = []
+        tags.push(question.tag)
+        const { data } = await axios.post(`/question`, {
+          title: question.title,
+          tags,
+          details: question.details
+        }, {
+          headers: { Authorization: `${localStorage.getItem(LS.authToken)}` }
+        })
+        if (data) {
+          cb(true, "Question Added")
+        }
+      } catch (error) {
+        cb(false, error.response.data.errors[0])
+      }
+    },
+
     removeCategoryFilter() {
       this.questions = this.questionsFromDb
     },
@@ -91,18 +110,3 @@ export const questionStore = defineStore({
     }
   },
 })
-
-// function applyFilter() {
-//   if (!selectedTag.value) {
-//     questions.value = quesStore.questions
-//     return;
-//   }
-//   questions.value = quesStore.questions.filter((ques: IQuestion) => {
-//     if (
-//       ques.tags.find((tag: ITag) => tag._id.toString() === selectedTag.value)
-//     ) {
-//       return ques;
-//     }
-//   });
-//   console.log(selectedTag.value);
-// }

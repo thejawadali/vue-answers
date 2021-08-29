@@ -38,7 +38,7 @@
       <div class="border-b-2 border-gray-300 border-dashed h-1 w-full my-4" />
 
       <!-- Question details -->
-      <p class="text-sm my-3">
+      <p class="text-sm my-3 whitespace-pre-line">
         {{ question.details }}
       </p>
       <div class="border-b-2 border-gray-300 border-dashed h-1 w-full my-4" />

@@ -32,7 +32,12 @@ const routes = [
 	{
 		path: '/questions',
 		name: 'questions',
-		component: () => import("./views/Questions.vue")
+		component: () => import("./views/questions/List.vue")
+	},
+	{
+		path: '/questions/add',
+		name: 'add-questions',
+		component: () => import("./views/questions/Add.vue")
 	},
 	{
 		path: '/questions/:questionId',

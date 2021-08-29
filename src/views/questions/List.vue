@@ -34,7 +34,7 @@
         focus:border-primary-500
       "
     >
-      <option value="">Select an option</option>
+      <option value="">Select tag</option>
       <option v-for="tag in tags" :key="tag._id" :value="tag._id">
         {{ tag.title }}
       </option>
@@ -58,9 +58,9 @@
 
 <script lang="ts" setup>
 import { computed, onMounted, ref } from "vue-demi";
-import BaseQuestion from "../components/Base/BaseQuestion.vue";
-import { questionStore } from "../store/question";
-import { tagsStore } from "../store/tag";
+import BaseQuestion from "../../components/Base/BaseQuestion.vue";
+import { questionStore } from "../../store/question";
+import { tagsStore } from "../../store/tag";
 import { useRouter } from "vue-router";
 
 interface IQuestion {
