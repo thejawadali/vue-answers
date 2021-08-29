@@ -144,9 +144,9 @@ const loggedIn = computed(() => {
   return localStorage.getItem(LS.authToken);
 });
 
-const nameOfUser = JSON.parse(
-  localStorage.getItem(LS.userProfile) as string
-).name;
+const nameOfUser = localStorage.getItem(LS.userProfile)
+  ? JSON.parse(localStorage.getItem(LS.userProfile) as string).name
+  : "";
 
 const dialogItems = [
   {

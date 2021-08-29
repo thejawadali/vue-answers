@@ -14,10 +14,21 @@ export const questionStore = defineStore({
   },
   actions: {
     // Fetch all questions
-    async fetchQuestions(cb: (success: boolean, msg: string) => any){
+    async fetchQuestions(cb: (success: boolean, msg: string) => any) {
       try {
-        const {data} = await axios.get("/question")
-        if (data) { 
+        const { data } = await axios.get("/question")
+        if (data) {
+          cb(true, JSON.stringify(data))
+        }
+      } catch (error) {
+        cb(false, error.response.data.errors[0])
+      }
+    },
+
+    async fetchSingleQuestion(_id: string, cb: (success: boolean, msg: string) => any) {
+      try {
+        const { data } = await axios.get(`/question/${_id}`)
+        if (data) {
           cb(true, JSON.stringify(data))
         }
       } catch (error) {

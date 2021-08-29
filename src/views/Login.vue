@@ -92,7 +92,7 @@ function login(e: any) {
     if (success) {
       // show toast
       console.log(msg);
-      router.push("/dashboard");
+      router.push("/questions");
     } else {
       // show toast
       console.error(msg);
