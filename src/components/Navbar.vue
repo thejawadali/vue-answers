@@ -34,13 +34,14 @@
         rounded-full
       "
     >
+      <search-icon />
       <input
         v-model="search"
         type="text"
         placeholder="Search"
-        class="outline-none text-md bg-transparent w-80"
+        class="outline-none mx-1 text-md bg-transparent w-80"
       />
-      <search-icon></search-icon>
+      <close-icon v-if="search" @click="clearSearch" class="cursor-pointer"/>
     </form>
 
     <!-- Avatar -->
@@ -125,6 +126,7 @@
 <script lang="ts" setup>
 import { computed, onMounted, ref } from "vue";
 import searchIcon from "virtual:vite-icons/ion/ios-search-strong";
+import closeIcon from "virtual:vite-icons/mdi/close";
 import chevronDown from "virtual:vite-icons/mdi/chevron-down";
 import account from "virtual:vite-icons/mdi/account";
 import login from "virtual:vite-icons/mdi/login";
@@ -134,7 +136,7 @@ import { useRouter } from "vue-router";
 import { LS, userAuth } from "../store/auth";
 import BaseAvatar from "../components/Base/BaseAvatar.vue";
 import { getFirstLetterOfName } from "../logic/utils";
-import { questionStore } from "../store/question"
+import { questionStore } from "../store/question";
 
 const auth = userAuth();
 const router = useRouter();
@@ -170,7 +172,6 @@ const dialogItems = [
     title: "Log out",
     icon: logout,
     onclick: () => {
-      loggedIn.value = false;
       auth.logout();
 
       open.value = false;
@@ -178,9 +179,14 @@ const dialogItems = [
   },
 ];
 
+function clearSearch() {
+  search.value = ''
+  questionStore().searchQuestion('');
+
+}
+
 function searchQuestion() {
-  // console.log(`search field is ${search.value}`);
-  questionStore().searchQuestion(search.value)
+  questionStore().searchQuestion(search.value);
 }
 
 function loginUserIn() {
