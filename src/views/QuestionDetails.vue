@@ -103,7 +103,7 @@
 import CategoryFlag from "../components/Base/BaseCategoryFlag.vue";
 import BaseAnswer from "../components/Base/BaseAnswer.vue";
 import BaseAvatar from "../components/Base/BaseAvatar.vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { computed, onMounted, ref } from "vue-demi";
 import { questionStore } from "../store/question";
 import dayjs from "dayjs";
@@ -112,6 +112,7 @@ import { isEmpty } from "lodash";
 import { LS } from "../store/auth";
 
 const route = useRoute();
+const router = useRouter();
 const qStore = questionStore();
 const question = ref({} as any);
 const answerDetails = ref("");
@@ -131,17 +132,21 @@ function getQuestion() {
 
 function addAnswer() {
   if (localStorage.getItem(LS.authToken)) {
-    const details = answerDetails.value
-    qStore.addAnswer(details, route.params.questionId as string, (success: boolean, msg: string)=> {
-      if (!success) {
-        console.error(msg);
-        return
+    const details = answerDetails.value;
+    qStore.addAnswer(
+      details,
+      route.params.questionId as string,
+      (success: boolean, msg: string) => {
+        if (!success) {
+          console.error(msg);
+          return;
+        }
+        console.log(msg);
+        reloadBrowser();
       }
-      console.log(msg);
-      reloadBrowser()
-    })
+    );
   } else {
-    console.error("Login First");
+    router.push("/login");
   }
 }
 

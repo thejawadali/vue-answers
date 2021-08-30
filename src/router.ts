@@ -6,10 +6,10 @@ const routes = [
   {
     path: "/",
     beforeEnter (to: any, from: any, next: any){
-      if (!localStorage.getItem(LS.authToken)) {
-        next("/login")
-        return
-      }
+      // if (!localStorage.getItem(LS.authToken)) {
+      //   next("/login")
+      //   return
+      // }
       next("/questions")
     }
   },

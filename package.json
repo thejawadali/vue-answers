@@ -1,5 +1,5 @@
 {
-  "name": "qa-app",
+  "name": "vue-answers",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",

@@ -23,7 +23,7 @@
       "
     >
       <button
-      @click="router.push('/questions/add')"
+      @click="askQuestion"
         class="bg-blue-500 active:bg-blue-600 rounded-md text-white px-2 py-1"
       >
         Ask a Question
@@ -57,6 +57,7 @@ import questionIcon from "virtual:vite-icons/ri/question-fill";
 import usersIcon from "virtual:vite-icons/clarity/users-solid";
 import categoryIcon from "virtual:vite-icons/bx/bx-category";
 import { useRouter } from "vue-router";
+import { LS } from "../store/auth"
 
 const router = useRouter()
 const sideNavItems = [
@@ -82,4 +83,13 @@ const sideNavItems = [
     },
   },
 ];
+
+function askQuestion() {
+  if (!localStorage.getItem(LS.authToken)) {
+    router.push("/login")
+    return
+  }
+  router.push('/questions/add')
+}
+
 </script>

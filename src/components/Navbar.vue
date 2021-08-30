@@ -124,14 +124,13 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted, ref } from "vue";
+import { computed, ref } from "vue";
 import searchIcon from "virtual:vite-icons/ion/ios-search-strong";
 import closeIcon from "virtual:vite-icons/mdi/close";
 import chevronDown from "virtual:vite-icons/mdi/chevron-down";
 import account from "virtual:vite-icons/mdi/account";
 import login from "virtual:vite-icons/mdi/login";
 import logout from "virtual:vite-icons/mdi/logout";
-import settings from "virtual:vite-icons/ri/settings-3-line";
 import { useRouter } from "vue-router";
 import { LS, userAuth } from "../store/auth";
 import BaseAvatar from "../components/Base/BaseAvatar.vue";
@@ -161,19 +160,10 @@ const dialogItems = [
     },
   },
   {
-    title: "Settings",
-    icon: settings,
-    onclick: () => {
-      console.log("Clicked Settings button");
-      open.value = false;
-    },
-  },
-  {
     title: "Log out",
     icon: logout,
     onclick: () => {
       auth.logout();
-
       open.value = false;
     },
   },
