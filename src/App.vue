@@ -2,15 +2,15 @@
   <div v-if="route.meta.layout && route.meta.layout === 'full'">
     <router-view />
   </div>
-  <div v-else class="w-full h-screen overflow-hidden relative bg-white">
+  <div v-else class="w-full h-screen overflow-hidden relative bg-gray-50">
     <Navbar />
-    <div class="relative top-14 w-full">
+    <div class="relative top-16 w-full">
       <Sidebar />
       <main
         class="
           h-screen
-          bg-white
           overflow-scroll
+          bg-transparent
           absolute
           left-0
           lg:left-48
