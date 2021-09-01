@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!isEmpty(question)" class="p-10 flex mb-8">
+  <div v-if="!isEmpty(question)" class="flex bg-white p-5 rounded-md">
     <!-- avatar -->
     <div class="mt-3">
       <base-avatar

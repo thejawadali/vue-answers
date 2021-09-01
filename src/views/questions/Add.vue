@@ -1,15 +1,15 @@
 <template>
-  <div class="w-full p-4">
-    <nav class="bg-gray-100 shadow-md my-4 px-5 py-5 rounded-sm">
-      <!-- back button -->
+  <div class="w-full bg-orange-500">
+    <!-- <nav class="bg-white shadow-md px-5 py-5 rounded-md mb-5">
       <div class="flex items-center">
         <button @click="$router.back()">
           <back-icon class="font-bold text-lg" />
         </button>
         <h2 class="mx-3 text-lg font-semibold">Ask Question</h2>
       </div>
-    </nav>
-    <form @submit.prevent="submitForm" class="w-full flex flex-col">
+    </nav> -->
+    <form @submit.prevent="submitForm" class="w-full flex flex-col bg-white p-4 rounded-md">
+      <h1 class="text-center font-semibold text-xl mt-2">Ask Anything</h1>
       <label for="title" class="text-md my-1 font-semibold">Title</label>
       <input
         class="
