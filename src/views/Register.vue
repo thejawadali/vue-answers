@@ -1,116 +1,140 @@
 <template>
-  <div class="bg-gray-100 flex justify-center items-center w-full h-screen">
-    <div class="container w-100 bg-white rounded-md shadow-lg">
-      <h1 class="text-3xl font-bold px-3 my-3 text-center">Sign Up</h1>
-      <div class="divider border-b border-gray-500" />
-      <form class="px-8 my-8">
+  <div class="flex w-full h-screen bg-gray-50 justify-center items-center">
+    <div class="flex w-auth-width flex-col">
+      <div class="bg-white px-6 py-8 rounded-md shadow-md text-black w-full">
+        <h1 class="mb-8 text-3xl text-center">Sign up</h1>
         <input
           type="text"
-          placeholder="Name"
+          class="
+            block
+            border border-grey-light
+            w-full
+            outline-none
+            p-3
+            rounded
+            mb-4
+            focus:border-purple-500
+          "
           v-model="user.name"
-          class="
-            bg-gray-200
-            w-full
-            outline-none
-            text-lg
-            px-4
-            py-2
-            rounded-full
-            focus:shadow-lg
-            my-2
-          "
+          placeholder="Full Name"
         />
+
         <input
           type="text"
-          placeholder="Username"
-          v-model="user.userName"
           class="
-            bg-gray-200
+            block
+            border border-grey-light
             w-full
             outline-none
-            text-lg
-            px-4
-            py-2
-            rounded-full
-            focus:shadow-lg
-            my-2
+            p-3
+            rounded
+            mb-4
+            focus:border-purple-500
           "
+          v-model="user.userName"
+          placeholder="Username"
+        />
+
+        <input
+          type="password"
+          class="
+            block
+            border border-grey-light
+            w-full
+            outline-none
+            p-3
+            rounded
+            mb-4
+            focus:border-purple-500
+          "
+          v-model="user.password"
+          placeholder="Password"
         />
         <input
           type="password"
-          placeholder="Password"
-          v-model="user.password"
           class="
-            bg-gray-200
+            block
+            border border-grey-light
             w-full
             outline-none
-            text-lg
-            px-4
-            py-2
-            rounded-full
-            focus:shadow-lg
-            my-2
+            p-3
+            rounded
+            mb-4
+            focus:border-purple-500
           "
+          v-model="confirmPassword"
+          placeholder="Confirm Password"
         />
+
         <button
-        @click="register"
+          @click="register"
+          type="submit"
           class="
-            bg-blue-500
             w-full
-            my-2
+            text-center
+            py-3
+            rounded
+            bg-purple-500
             text-white
-            active:bg-blue-600
-            outline-none
-            text-lg
-            px-4
-            py-2
-            rounded-full
+            hover:bg-green-dark
+            focus:outline-none
+            my-1
           "
         >
-          Register Now
+          Create Account
         </button>
-        <div class="text-center my-4 text-sm">
-          <p>Already Registered? 
-            <a @click="gotoRegister" class="cursor-pointer text-blue-500 hover:underline">Sign In</a>
+        <div class="text-center my-4 text-sm text-gray-500">
+          <p>
+            Already Registered?
+            <a
+              @click="gotoRegister"
+              class="cursor-pointer text-purple-500 hover:underline"
+              >Sign In</a
+            >
             instead
           </p>
         </div>
-      </form>
+      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-  import { reactive } from "vue-demi"
+import { reactive, ref } from "vue-demi";
 import { useRouter } from "vue-router";
-import { userAuth } from "../store/auth"
+import { userAuth } from "../store/auth";
 
-  const auth = userAuth()
-  const router = useRouter()
+const auth = userAuth();
+const router = useRouter();
 
-  const user = reactive({
-    name: '',
-    userName: '',
-    password: ''
-  })
+const user = reactive({
+  name: "",
+  userName: "",
+  password: "",
+});
 
-  function register(e: any) {
-    e.preventDefault();
-    auth.signup(user, (success: boolean, msg: string)=> {
-      if (success) {
-        // show toast
-        console.log(msg);
-        router.push("/dashboard")
-      }else{
-        // show toast
-        console.error(msg);
-      }
-    })
-    
+const confirmPassword = ref("");
+
+function register(e: any) {
+  e.preventDefault();
+  if (confirmPassword.value !== user.password) {
+    console.error("Password not matched");
+    return;
   }
-  
-  function gotoRegister(e: any) {
-    e.preventDefault();
-    router.push("/login")
-  }
+  auth.signup(user, (success: boolean, msg: string) => {
+    if (success) {
+      // show toast
+      console.log(msg);
+      router.push("/dashboard");
+    } else {
+      // show toast
+      console.error(msg);
+    }
+  });
+}
+
+function gotoRegister(e: any) {
+  e.preventDefault();
+  router.push("/login");
+}
 </script>

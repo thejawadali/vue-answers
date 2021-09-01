@@ -4,6 +4,7 @@ module.exports = {
   theme: {
     extend: {
       width: {
+        'auth-width': '35rem',
         '100': '60rem'
       }
     },
