@@ -81,7 +81,7 @@
             my-1
           "
         >
-          Create Account
+          Register Now
         </button>
         <div class="text-center my-4 text-sm text-gray-500">
           <p>

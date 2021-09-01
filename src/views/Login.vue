@@ -1,73 +1,71 @@
 <template>
-  <div class="bg-gray-100 flex justify-center items-center w-full h-screen">
-    <div class="container w-100 bg-white rounded-md shadow-lg">
-      <h1 class="text-3xl font-bold px-3 my-3 text-center">
-        Login
-      </h1>
-      <div class="divider border-b border-gray-500" />
-      <form class="px-8 my-8">
+  <div class="flex w-full h-screen bg-gray-50 justify-center items-center">
+    <div class="flex w-auth-width flex-col">
+      <div class="bg-white px-6 py-8 rounded-md shadow-md text-black w-full">
+        <h1 class="mb-8 text-3xl text-center">Login</h1>
         <input
           type="text"
-          placeholder="Username"
-          v-model="user.userName"
           class="
-            bg-gray-200
+            block
+            border border-grey-light
             w-full
             outline-none
-            text-lg
-            px-4
-            py-2
-            rounded-full
-            focus:shadow-lg
-            my-2
+            p-3
+            rounded
+            mb-4
+            focus:border-purple-500
           "
+          v-model="user.userName"
+          placeholder="Username"
         />
+
         <input
           type="password"
-          placeholder="Password"
-          v-model="user.password"
           class="
-            bg-gray-200
+            block
+            border border-grey-light
             w-full
             outline-none
-            text-lg
-            px-4
-            py-2
-            rounded-full
-            focus:shadow-lg
-            my-2
+            p-3
+            rounded
+            mb-4
+            focus:border-purple-500
           "
+          v-model="user.password"
+          placeholder="Password"
         />
-        <div class="text-right my-2">
+        <div class="text-right my-2 text-gray-600">
           <a href="#" class="text-sm hover:underline">Forgot Password?</a>
         </div>
+
         <button
           @click="login"
+          type="submit"
           class="
-            bg-blue-500
             w-full
+            text-center
+            py-3
+            rounded
+            bg-purple-500
             text-white
-            active:bg-blue-600
-            outline-none
-            text-lg
-            px-4
-            py-2
-            rounded-full
+            hover:bg-green-dark
+            focus:outline-none
+            my-1
           "
         >
           Login
         </button>
-        <div class="text-center my-4 text-sm">
+        <div class="text-center my-4 text-sm text-gray-500">
           <p>
             Not Registered?
             <a
               @click="gotoRegister"
-              class="text-blue-500 hover:underline cursor-pointer"
+              class="text-purple-500 hover:underline cursor-pointer"
               >Sign up now</a
             >
           </p>
         </div>
-      </form>
+      </div>
     </div>
   </div>
 </template>
@@ -100,10 +98,9 @@ function login(e: any) {
   });
 }
 
-onMounted(()=>{
-  user.userName = 'user123',
-  user.password = '12345678'
-})
+onMounted(() => {
+  (user.userName = "user123"), (user.password = "12345678");
+});
 
 function gotoRegister(e: any) {
   e.preventDefault();
