@@ -1,7 +1,7 @@
 <template>
   <div class="bg-gray-100 flex justify-center items-center w-full h-screen">
     <div class="container w-100 bg-white rounded-md shadow-lg">
-      <h1 class="text-3xl font-bold px-3 my-3 text-center" @dblclick="jugad">
+      <h1 class="text-3xl font-bold px-3 my-3 text-center">
         Login
       </h1>
       <div class="divider border-b border-gray-500" />
@@ -73,7 +73,7 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive } from "vue-demi";
+import { onMounted, reactive } from "vue-demi";
 import { useRouter } from "vue-router";
 import { userAuth } from "../store/auth";
 
@@ -100,10 +100,11 @@ function login(e: any) {
   });
 }
 
-function jugad() {
-  user.userName = "jawadali";
-  user.password = "123123123";
-}
+onMounted(()=>{
+  user.userName = 'user123',
+  user.password = '12345678'
+})
+
 function gotoRegister(e: any) {
   e.preventDefault();
   router.push("/signup");

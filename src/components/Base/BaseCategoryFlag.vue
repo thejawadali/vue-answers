@@ -8,7 +8,6 @@
       py-1
       rounded-full
       inline-block
-      cursor-pointer
       hover:bg-gray-100
       active:bg-gray-200
     "

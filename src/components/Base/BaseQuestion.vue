@@ -2,11 +2,22 @@
   <div class="hover:bg-gray-50">
     <!-- Question -->
     <div class="flex justify-between items-center px-8 py-3">
-      <div class="w-10/12">
+      <div class="">
         <!-- title -->
         <h1 class="font-bold cursor-pointer">{{ question.title }}</h1>
         <!-- details -->
-        <p class="truncate cursor-pointer text-gray-500 h-5 text-sm my-1">
+        <p
+          class="
+            truncate
+            cursor-pointer
+            text-gray-500
+            h-5
+            w-100
+            text-sm
+            my-1
+          "
+        >
+          <!-- <p class="cursor-pointer w-20 text-gray-500 h-5 text-sm my-1"> -->
           {{ question.details }}
         </p>
         <div class="flex my-4 mx-2 items-center">
@@ -14,13 +25,19 @@
           <base-avatar :title="getFirstLetterOfName(question.user.name)" />
           <!-- time -->
           <p class="mx-2 text-sm text-gray-500">
-            Asked by <span class="text-purple-400 cursor-pointer">{{question.user.name}}</span> {{ timeDifference(question.createdAt) }}
+            Asked by
+            <span class="text-purple-500">{{
+              question.user.name
+            }}</span>
+            {{ timeDifference(question.createdAt) }}
           </p>
           <div v-for="(tag, index) in tags" :key="index" class="mx-2">
             <category-flag>{{ tag }}</category-flag>
           </div>
         </div>
       </div>
+
+      <!-- Views and answers section -->
       <div class="flex">
         <div class="mx-3">
           <base-counter>
@@ -35,7 +52,6 @@
           </base-counter>
         </div>
       </div>
-      <!-- border -->
     </div>
     <!-- Border -->
     <div class="border-b-2 border-gray-200 h-1 mx-4" />
