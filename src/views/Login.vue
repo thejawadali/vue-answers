@@ -34,9 +34,9 @@
           v-model="user.password"
           placeholder="Password"
         />
-        <div class="text-right my-2 text-gray-600">
+        <!-- <div class="text-right my-2 text-gray-600">
           <a href="#" class="text-sm hover:underline">Forgot Password?</a>
-        </div>
+        </div> -->
 
         <button
           @click="login"
@@ -65,6 +65,9 @@
             >
           </p>
         </div>
+      </div>
+      <div class="text-center mt-4">
+        <a class="text-sm cursor-pointer text-blue-700 underline" @click="$router.push('/questions')">Skip For Now</a>
       </div>
     </div>
   </div>
@@ -97,6 +100,7 @@ function login(e: any) {
     }
   });
 }
+
 
 onMounted(() => {
   (user.userName = "user123"), (user.password = "12345678");

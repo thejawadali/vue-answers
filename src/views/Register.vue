@@ -95,6 +95,9 @@
           </p>
         </div>
       </div>
+      <div class="text-center mt-4">
+        <a class="text-sm cursor-pointer text-blue-700 underline" @click="$router.push('/questions')">Skip For Now</a>
+      </div>
     </div>
   </div>
 </template>
