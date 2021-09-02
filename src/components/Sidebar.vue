@@ -2,6 +2,7 @@
   <main class="w-full flex flex-col items-start mx-3 px-4">
     <!-- Create Tag button -->
     <button
+      @click="$emit('createTag')"
       class="
         bg-gray-200
         w-full
@@ -12,6 +13,7 @@
         text-sm text-gray-600
         hover:bg-gray-300
         rounded-md
+        active:bg-gray-400
       "
     >
       <plus-icon class="bg-gray-300 mr-1 ml-3" /> Create Tag
@@ -63,8 +65,8 @@
 </template>
 
 <script lang="ts" setup>
-import plusIcon from "virtual:vite-icons/ic/baseline-add";
 import { onMounted, ref } from "vue-demi";
+import plusIcon from "virtual:vite-icons/ic/baseline-add";
 import { tagsStore } from "../store/tag";
 import { questionStore } from "../store/question";
 
@@ -74,6 +76,8 @@ interface ITag {
   _id: any;
   title: string;
 }
+
+const emit = defineEmits(["createTag"]);
 
 const tag = tagsStore();
 const tags = ref([] as ITag[]);
@@ -100,4 +104,5 @@ onMounted(() => {
     tags.value = JSON.parse(msg);
   });
 });
+
 </script>
