@@ -1,7 +1,7 @@
 <template>
   <main class="flex">
     <!-- side bar -->
-    <Sidebar @createTag="open = true" />
+    <Sidebar @createTag="createTag" />
     <!-- main content i.e. questions list -->
     <div class="bg-white rounded-md bg-orange-300">
       <div v-if="questions.length > 0">
@@ -78,6 +78,7 @@ import Sidebar from "../../components/Sidebar.vue";
 import Modal from "../../components/Base/BaseModal.vue";
 import { tagsStore } from "../../store/tag";
 import { useRouter } from "vue-router";
+import { LS } from "../../store/auth"
 
 interface IQuestion {
   _id: any;
@@ -115,6 +116,14 @@ function applyFilter() {
 const questions = computed(() => {
   return quesStore.questions;
 });
+
+function createTag() {
+  if (!localStorage.getItem(LS.authToken)) {
+    router.push("/login")
+    return
+  }
+  open.value = true
+}
 
 // Fetch data from db
 onMounted(() => {
