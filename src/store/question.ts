@@ -72,11 +72,9 @@ export const questionStore = defineStore({
 
     async addQuestion(question: any, cb: (success: boolean, msg: string) => any) {
       try {
-        const tags : any [] = []
-        tags.push(question.tag)
         const { data } = await axios.post(`/question`, {
           title: question.title,
-          tags,
+          tags: question.tags,
           details: question.details
         }, {
           headers: { Authorization: `${localStorage.getItem(LS.authToken)}` }
