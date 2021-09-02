@@ -1,7 +1,7 @@
 <template>
   <main class="flex">
     <!-- side bar -->
-    <Sidebar @createTag="createTag" />
+    <Sidebar @createTag="openTagsModal" />
     <!-- main content i.e. questions list -->
     <div class="bg-white rounded-md bg-orange-300">
       <div v-if="questions.length > 0">
@@ -33,6 +33,7 @@
       <div class="w-full flex flex-col px-5 border-b border-gray-300 pb-8">
         <label for="title" class="text-md my-2 font-semibold">Title</label>
         <input
+          v-model="newTagtitle"
           class="
             border border-grey-light
             focus:border-purple-500
@@ -52,6 +53,7 @@
     <template #action>
       <div class="p-4">
         <button
+          @click="createTag"
           class="
             px-4
             bg-purple-500
@@ -78,7 +80,8 @@ import Sidebar from "../../components/Sidebar.vue";
 import Modal from "../../components/Base/BaseModal.vue";
 import { tagsStore } from "../../store/tag";
 import { useRouter } from "vue-router";
-import { LS } from "../../store/auth"
+import { LS } from "../../store/auth";
+import { reloadBrowser } from "../../logic/utils";
 
 interface IQuestion {
   _id: any;
@@ -98,12 +101,14 @@ interface ITag {
 const open = ref(false);
 
 const quesStore = questionStore();
-const tagStore = tagsStore();
+const tStore = tagsStore();
 const router = useRouter();
 
 const tags = ref([] as ITag[]);
 
 const selectedTag = ref("");
+
+const newTagtitle = ref("");
 
 function applyFilter() {
   if (!selectedTag.value) {
@@ -117,12 +122,25 @@ const questions = computed(() => {
   return quesStore.questions;
 });
 
-function createTag() {
+function openTagsModal() {
   if (!localStorage.getItem(LS.authToken)) {
-    router.push("/login")
-    return
+    router.push("/login");
+    return;
   }
-  open.value = true
+  open.value = true;
+}
+
+function createTag() {
+  const title = newTagtitle.value;
+  tStore.createTag(title, (success: boolean, msg: string) => {
+    if (success) {
+      console.log(msg);
+      open.value = false;
+      reloadBrowser();
+    } else {
+      console.error(msg);
+    }
+  });
 }
 
 // Fetch data from db
@@ -135,7 +153,7 @@ onMounted(() => {
   });
 
   // Get all tags form db
-  tagStore.fetchTags((success: boolean, msg: string) => {
+  tStore.fetchTags((success: boolean, msg: string) => {
     if (!success) {
       console.error(msg);
       return;
