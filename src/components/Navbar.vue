@@ -185,6 +185,7 @@ const dialogItems = [
     onclick: () => {
       auth.logout();
       open.value = false;
+      // router.push("/questions")
     },
   },
 ];

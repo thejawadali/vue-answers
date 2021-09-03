@@ -1,15 +1,10 @@
 import { createRouter, createWebHistory } from "vue-router"
-import { LS } from "./store/auth"
 
 
 const routes = [
   {
     path: "/",
     beforeEnter (to: any, from: any, next: any){
-      // if (!localStorage.getItem(LS.authToken)) {
-      //   next("/login")
-      //   return
-      // }
       next("/questions")
     }
   },
