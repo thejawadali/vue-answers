@@ -6,7 +6,7 @@ import { useRoute, useRouter } from "vue-router";
 import { computed, onMounted, ref } from "vue-demi";
 import { questionStore } from "../store/question";
 import dayjs from "dayjs";
-import { getFirstLetterOfName, reloadBrowser } from "../logic/utils";
+import { getFirstLetterOfName, reloadBrowser, toast } from "../logic/utils";
 import { isEmpty } from "lodash";
 import { LS } from "../store/auth";
 
@@ -30,7 +30,10 @@ function getQuestion() {
 }
 
 function addAnswer() {
-  if (answerDetails.value === '') return
+  if (answerDetails.value === "") {
+    toast("Can not add empty answer", "danger");
+    return;
+  }
   if (localStorage.getItem(LS.authToken)) {
     const details = answerDetails.value;
     qStore.addAnswer(
@@ -38,11 +41,14 @@ function addAnswer() {
       route.params.questionId as string,
       (success: boolean, msg: string) => {
         if (!success) {
+          toast(msg, "danger");
           console.error(msg);
           return;
         }
-        console.log(msg);
-        reloadBrowser();
+        toast(msg, "success");
+        setTimeout(() => {
+          reloadBrowser();
+        }, 300);
       }
     );
   } else {

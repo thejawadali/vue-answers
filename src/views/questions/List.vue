@@ -8,7 +8,7 @@ import Modal from "../../components/Base/BaseModal.vue";
 import { tagsStore } from "../../store/tag";
 import { useRouter } from "vue-router";
 import { LS } from "../../store/auth";
-import { reloadBrowser } from "../../logic/utils";
+import { reloadBrowser, toast } from "../../logic/utils";
 
 interface IQuestion {
   _id: any;
@@ -58,7 +58,9 @@ function openTagsModal() {
 }
 
 function createTag() {
-  if (newTagtitle.value === "") return;
+  if (newTagtitle.value === "") {
+    toast("Tag Title is required", "danger")
+    return};
   const title = newTagtitle.value;
   tStore.createTag(title, (success: boolean, msg: string) => {
     if (success) {
@@ -73,6 +75,7 @@ function createTag() {
 
 // Fetch data from db
 onMounted(() => {
+  
   quesStore.fetchQuestions((success: boolean, msg: string) => {
     if (!success) {
       console.error(msg);

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, reactive, ref } from "vue-demi";
 import backIcon from "virtual:vite-icons/mdi/keyboard-backspace";
-import { reloadBrowser } from "../../logic/utils";
+import { reloadBrowser, toast } from "../../logic/utils";
 import { questionStore } from "../../store/question";
 import { tagsStore } from "../../store/tag";
 import Multiselect from "@vueform/multiselect";
@@ -17,7 +17,7 @@ const newQuestion = reactive({
 onMounted(() => {
   store.fetchTags((success: boolean, msg: string) => {
     if (!success) {
-      console.error(msg);
+      toast(msg, "danger");
       return;
     }
     tags.value = JSON.parse(msg).map((tag: any) => {
@@ -30,16 +30,21 @@ onMounted(() => {
 });
 
 function submitForm() {
+  if (newQuestion.tags.length < 1 || newQuestion.title === "") {
+    toast("Can not continue required fields", "danger");
+  }
   questionStore().addQuestion(newQuestion, (success: boolean, msg: string) => {
     if (!success) {
-      console.error(msg);
+      toast(msg, "danger");
       return;
     }
-    console.log("Question added");
-    newQuestion.tags = [];
-    newQuestion.title = "";
-    newQuestion.details = "";
-    reloadBrowser("/questions");
+    toast(msg, "success");
+    setTimeout(() => {
+      newQuestion.tags = [];
+      newQuestion.title = "";
+      newQuestion.details = "";
+      reloadBrowser("/questions");
+    }, 3000);
   });
 }
 </script>

@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
 import { LS } from "./auth"
+import { toast } from "../logic/utils"
 
 
 interface IQuestion {
@@ -39,8 +40,10 @@ export const questionStore = defineStore({
           this.questions = data
           cb(true, "Loaded successfully")
         }
-      } catch (error) {
+      } catch (error: any) {
+        const msg = error.response.data.errors[0]
         cb(false, error.response.data.errors[0])
+        toast(msg, 'danger')
       }
     },
 
@@ -50,8 +53,10 @@ export const questionStore = defineStore({
         if (data) {
           cb(true, JSON.stringify(data))
         }
-      } catch (error) {
+      } catch (error: any) {
+        const msg = error.response.data.errors[0]
         cb(false, error.response.data.errors[0])
+        toast(msg, 'danger')
       }
     },
     // {{baseURL}}/question/{{questionId}}/answer
@@ -65,7 +70,7 @@ export const questionStore = defineStore({
         if (data) {
           cb(true, "Answer Added")
         }
-      } catch (error) {
+      } catch (error: any) {
         cb(false, error.response.data.errors[0])
       }
     },
@@ -82,7 +87,7 @@ export const questionStore = defineStore({
         if (data) {
           cb(true, "Question Added")
         }
-      } catch (error) {
+      } catch (error: any) {
         cb(false, error.response.data.errors[0])
       }
     },
