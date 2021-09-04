@@ -39,6 +39,14 @@ const routes = [
 		name: 'questions-details',
 		component: () => import("./views/QuestionDetails.vue")
 	},
+	{
+		path: '/:pathMatch(.*)*',
+		name: 'page-not-found',
+		component: () => import("./views/404.vue"),
+    meta: {
+      layout: "full"
+    }
+	},
 ];
 
 
