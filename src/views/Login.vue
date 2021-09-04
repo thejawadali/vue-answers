@@ -12,7 +12,7 @@
 
         <base-input 
         placeholder="Password"
-        error-message="Password is required"
+        error-message="Password of min 8 char is required"
         v-model="user.password"
         type="password">
         </base-input>
@@ -69,7 +69,7 @@ const router = useRouter();
 
 function login(e: any) {
   e.preventDefault();
-  if (user.userName === '' && user.password === '') return
+  if (user.userName === '' || user.password === '') return
   auth.login(user, (success: boolean, msg: string) => {
     if (success) {
       // show toast

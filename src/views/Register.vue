@@ -3,67 +3,30 @@
     <div class="flex w-auth-width flex-col">
       <div class="bg-white px-6 py-8 rounded-md shadow-md text-black w-full">
         <h1 class="mb-8 text-3xl text-center">Sign up</h1>
-        <input
-          type="text"
-          class="
-            block
-            border border-grey-light
-            w-full
-            outline-none
-            p-3
-            rounded
-            mb-4
-            focus:border-purple-500
-          "
-          v-model="user.name"
+        <base-input
           placeholder="Full Name"
-        />
-
-        <input
+          error-message="Name is required"
+          v-model="user.name"
           type="text"
-          class="
-            block
-            border border-grey-light
-            w-full
-            outline-none
-            p-3
-            rounded
-            mb-4
-            focus:border-purple-500
-          "
+        />
+        <base-input
+          placeholder="Usename"
+          error-message="Username is required"
           v-model="user.userName"
-          placeholder="Username"
+          type="text"
         />
 
-        <input
-          type="password"
-          class="
-            block
-            border border-grey-light
-            w-full
-            outline-none
-            p-3
-            rounded
-            mb-4
-            focus:border-purple-500
-          "
-          v-model="user.password"
+        <base-input
           placeholder="Password"
-        />
-        <input
+          error-message="Password of min 8 char is required"
+          v-model="user.password"
           type="password"
-          class="
-            block
-            border border-grey-light
-            w-full
-            outline-none
-            p-3
-            rounded
-            mb-4
-            focus:border-purple-500
-          "
+        />
+        <base-input
+          placeholder="Confrim Password"
+          error-message="Password of min 8 char is required"
           v-model="confirmPassword"
-          placeholder="Confirm Password"
+          type="password"
         />
 
         <button
@@ -96,7 +59,11 @@
         </div>
       </div>
       <div class="text-center mt-4">
-        <a class="text-sm cursor-pointer text-blue-700 underline" @click="$router.push('/questions')">Skip For Now</a>
+        <a
+          class="text-sm cursor-pointer text-blue-700 underline"
+          @click="$router.push('/questions')"
+          >Skip For Now</a
+        >
       </div>
     </div>
   </div>
@@ -120,6 +87,7 @@ const confirmPassword = ref("");
 
 function register(e: any) {
   e.preventDefault();
+  if (user.name === '' || user.password === '' || user.password === '') return
   if (confirmPassword.value !== user.password) {
     console.error("Password not matched");
     return;
@@ -128,7 +96,7 @@ function register(e: any) {
     if (success) {
       // show toast
       console.log(msg);
-      router.push("/dashboard");
+      router.push("/questions");
     } else {
       // show toast
       console.error(msg);
