@@ -1,5 +1,5 @@
 Arguments: 
-  /Users/jawadali/.nvm/versions/node/v14.17.0/bin/node /Users/jawadali/.nvm/versions/node/v14.17.0/bin/yarn add -D @types/dyajs
+  /Users/jawadali/.nvm/versions/node/v14.17.0/bin/node /Users/jawadali/.nvm/versions/node/v14.17.0/bin/yarn add -D @types/mosha-vue-toastify
 
 PATH: 
   /Users/jawadali/.nvm/versions/node/v14.17.0/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Users/jawadali/.nvm/versions/node/v14.17.0/bin:/Users/jawadali/.fig/bin
@@ -14,7 +14,7 @@ Platform:
   darwin x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@types%2fdyajs: Not found
+  Error: https://registry.yarnpkg.com/@types%2fmosha-vue-toastify: Not found
       at Request.params.callback [as _callback] (/Users/jawadali/.nvm/versions/node/v14.17.0/lib/node_modules/yarn/lib/cli.js:66988:18)
       at Request.self.callback (/Users/jawadali/.nvm/versions/node/v14.17.0/lib/node_modules/yarn/lib/cli.js:140662:22)
       at Request.emit (events.js:376:20)
@@ -28,7 +28,7 @@ Trace:
 
 npm manifest: 
   {
-    "name": "qa-app",
+    "name": "vue-answers",
     "version": "0.0.0",
     "scripts": {
       "dev": "vite",
@@ -36,15 +36,20 @@ npm manifest:
       "serve": "vite preview"
     },
     "dependencies": {
+      "@vueform/multiselect": "^2.1.2",
       "axios": "^0.21.1",
       "dayjs": "^1.10.6",
+      "lodash": "^4.17.21",
+      "mosha-vue-toastify": "^1.0.21",
       "pinia": "^2.0.0-rc.6",
       "vue": "^3.2.6",
       "vue-router": "^4.0.11"
     },
     "devDependencies": {
       "@iconify/json": "^1.1.387",
+      "@types/": "vueform/multiselect",
       "@types/axios": "^0.14.0",
+      "@types/lodash": "^4.14.172",
       "@vitejs/plugin-vue": "^1.3.0",
       "@vue/compiler-sfc": "^3.0.5",
       "autoprefixer": "^10.3.1",
@@ -154,6 +159,10 @@ Lockfile:
       "@nodelib/fs.scandir" "2.1.5"
       fastq "^1.6.0"
   
+  "@types/@vueform/multiselect":
+    version "2.1.2"
+    resolved "https://codeload.github.com/vueform/multiselect/tar.gz/fcea4f9dceb974ed7f2cac6c2f52003451147005"
+  
   "@types/axios@^0.14.0":
     version "0.14.0"
     resolved "https://registry.yarnpkg.com/@types/axios/-/axios-0.14.0.tgz#ec2300fbe7d7dddd7eb9d3abf87999964cafce46"
@@ -165,6 +174,11 @@ Lockfile:
     version "0.0.48"
     resolved "https://registry.npmjs.org/@types/estree/-/estree-0.0.48.tgz"
     integrity sha512-LfZwXoGUDo0C3me81HXgkBg5CTQYb6xzEl+fNmbO4JdRiSKQ8A0GD1OBBvKAIsbCUgoyAty7m99GqqMQe784ew==
+  
+  "@types/lodash@^4.14.172":
+    version "4.14.172"
+    resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.172.tgz#aad774c28e7bfd7a67de25408e03ee5a8c3d028a"
+    integrity sha512-/BHF5HAx3em7/KkzVKm3LrsD6HZAXuXO1AJZQ3cRRBZj4oHZDviWPYu0aEplAqDFNHZPW6d3G7KN+ONcCCC7pw==
   
   "@types/parse-json@^4.0.0":
     version "4.0.0"
@@ -390,6 +404,11 @@ Lockfile:
     version "3.2.0-beta.5"
     resolved "https://registry.npmjs.org/@vue/shared/-/shared-3.2.0-beta.5.tgz"
     integrity sha512-DprP8v3vg/nnfl4b93hJ+ujojiFAMwXbng8N9NpNDSuFMZG0zFO3Tqh3X1JQgaE7jUgYoQzR2TTGCKNb/4+QGA==
+  
+  "@vueform/multiselect@^2.1.2":
+    version "2.1.2"
+    resolved "https://registry.yarnpkg.com/@vueform/multiselect/-/multiselect-2.1.2.tgz#1e183e356c0feea00f868800124b35eb3598a9f5"
+    integrity sha512-iiMc7EmvCJ64zE1hChOfJloX3z0DrO05gucTjYXkJ03C0+Kh6wXB6Re9fnmC1ErsFBRBqS45J5H7HakpNE1zgQ==
   
   acorn-node@^1.6.1:
     version "1.8.2"
@@ -1143,7 +1162,7 @@ Lockfile:
   
   lodash@^4.17.21:
     version "4.17.21"
-    resolved "https://registry.npmjs.org/lodash/-/lodash-4.17.21.tgz"
+    resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
     integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
   
   lru-cache@^5.1.1:
@@ -1196,6 +1215,11 @@ Lockfile:
     version "1.1.0"
     resolved "https://registry.npmjs.org/modern-normalize/-/modern-normalize-1.1.0.tgz"
     integrity sha512-2lMlY1Yc1+CUy0gw4H95uNN7vjbpoED7NNRSBHE25nWfLBdmMzFCsPshlzbxHz+gYMcBEUN8V4pU16prcdPSgA==
+  
+  mosha-vue-toastify@^1.0.21:
+    version "1.0.21"
+    resolved "https://registry.yarnpkg.com/mosha-vue-toastify/-/mosha-vue-toastify-1.0.21.tgz#36bd9a1a5aa82bf5509275bbd9ef3fba909e2814"
+    integrity sha512-rSJxCwwqNnzDuqMu39qefMZAcWr0fz38HPVrOtIZmauTvI9gBYz/PGTP2RKxbXLCVV3txouvMbDjiATRJLiQXQ==
   
   nanoid@^3.1.23:
     version "3.1.23"

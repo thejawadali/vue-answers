@@ -1148,6 +1148,11 @@ modern-normalize@^1.1.0:
   resolved "https://registry.npmjs.org/modern-normalize/-/modern-normalize-1.1.0.tgz"
   integrity sha512-2lMlY1Yc1+CUy0gw4H95uNN7vjbpoED7NNRSBHE25nWfLBdmMzFCsPshlzbxHz+gYMcBEUN8V4pU16prcdPSgA==
 
+mosha-vue-toastify@^1.0.21:
+  version "1.0.21"
+  resolved "https://registry.yarnpkg.com/mosha-vue-toastify/-/mosha-vue-toastify-1.0.21.tgz#36bd9a1a5aa82bf5509275bbd9ef3fba909e2814"
+  integrity sha512-rSJxCwwqNnzDuqMu39qefMZAcWr0fz38HPVrOtIZmauTvI9gBYz/PGTP2RKxbXLCVV3txouvMbDjiATRJLiQXQ==
+
 nanoid@^3.1.23:
   version "3.1.23"
   resolved "https://registry.npmjs.org/nanoid/-/nanoid-3.1.23.tgz"
