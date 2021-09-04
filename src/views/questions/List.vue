@@ -123,7 +123,6 @@ onMounted(() => {
     </template>
 
     <template #default>
-      <!-- @submit.prevent="submitForm" -->
       <div class="w-full flex flex-col px-5 border-b border-gray-300 pb-8">
         <label class="text-md my-2 font-semibold">Title</label>
         <base-input

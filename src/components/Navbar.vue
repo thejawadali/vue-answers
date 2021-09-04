@@ -17,7 +17,7 @@
     "
   >
     <!-- left side items -->
-    <div class="flex flex-1 items-center">
+    <div class="flex items-center">
       <!-- Logo -->
       <h1
         class="text-xl font-bold cursor-pointer text-white mr-3"
@@ -35,12 +35,13 @@
     </div>
 
     <!-- right side items -->
-    <div class="flex flex-1 items-center justify-end">
+    <div class="flex items-center justify-end">
       <!-- search field -->
       <form
         @submit.prevent="searchQuestion"
         class="
-          flex
+          hidden
+          md:flex
           border border-gray-200
           justify-between
           items-center
@@ -66,12 +67,7 @@
       <!-- Avatar -->
       <div class="ml-3">
         <div v-if="loggedIn" id="avatar-container" class="flex items-center">
-          <base-avatar :title="getFirstLetterOfName(nameOfUser)" />
-          <p id="name" class="px-2 text-sm">{{ nameOfUser }}</p>
-          <chevron-down
-            @click="open = !open"
-            class="cursor-pointer hover:bg-gray-200 rounded-full"
-          ></chevron-down>
+          <base-avatar @click="open = !open" :title="getFirstLetterOfName(nameOfUser)" />
           <ul
             v-if="open"
             x-transition:leave="transition ease-in duration-150"
@@ -98,6 +94,7 @@
                 @click="item.onclick"
                 class="
                   inline-flex
+                  cursor-pointer
                   items-center
                   w-full
                   px-2
@@ -147,9 +144,6 @@
 import { computed, ref } from "vue";
 import searchIcon from "virtual:vite-icons/ion/ios-search-strong";
 import closeIcon from "virtual:vite-icons/mdi/close";
-import chevronDown from "virtual:vite-icons/mdi/chevron-down";
-import account from "virtual:vite-icons/mdi/account";
-import login from "virtual:vite-icons/mdi/login";
 import logout from "virtual:vite-icons/mdi/logout";
 import { useRouter } from "vue-router";
 import { LS, userAuth } from "../store/auth";
@@ -172,20 +166,11 @@ const nameOfUser = localStorage.getItem(LS.userProfile)
 
 const dialogItems = [
   {
-    title: "Profile",
-    icon: account,
-    onclick: () => {
-      console.log("Clicked Profile button");
-      open.value = false;
-    },
-  },
-  {
     title: "Log out",
     icon: logout,
     onclick: () => {
       auth.logout();
       open.value = false;
-      // router.push("/questions")
     },
   },
 ];
