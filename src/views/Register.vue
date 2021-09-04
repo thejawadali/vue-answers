@@ -1,3 +1,48 @@
+<script lang="ts" setup>
+import { reactive, ref } from "vue-demi";
+import { useRouter } from "vue-router";
+import { toast } from "../logic/utils"
+import { userAuth } from "../store/auth";
+
+const auth = userAuth();
+const router = useRouter();
+
+const user = reactive({
+  name: "",
+  userName: "",
+  password: "",
+});
+
+const confirmPassword = ref("");
+
+function register(e: any) {
+  e.preventDefault();
+  if (user.name === "" || user.password === "" || user.password === "") {
+    toast("Please required fields to continue", "danger")
+    return};
+  if (confirmPassword.value !== user.password) {
+    toast("Password not matched", "danger")
+    return;
+  }
+  auth.signup(user, (success: boolean, msg: string) => {
+    if (success) {
+      // show toast
+      toast(msg, "success")
+      router.push("/questions");
+    } else {
+      // show toast
+      toast(msg, "danger")
+      console.error(msg);
+    }
+  });
+}
+
+function gotoRegister(e: any) {
+  e.preventDefault();
+  router.push("/login");
+}
+</script>
+
 <template>
   <div class="flex w-full h-screen bg-gray-50 justify-center items-center">
     <div class="flex w-auth-width flex-col">
@@ -68,44 +113,3 @@
     </div>
   </div>
 </template>
-
-<script lang="ts" setup>
-import { reactive, ref } from "vue-demi";
-import { useRouter } from "vue-router";
-import { userAuth } from "../store/auth";
-
-const auth = userAuth();
-const router = useRouter();
-
-const user = reactive({
-  name: "",
-  userName: "",
-  password: "",
-});
-
-const confirmPassword = ref("");
-
-function register(e: any) {
-  e.preventDefault();
-  if (user.name === '' || user.password === '' || user.password === '') return
-  if (confirmPassword.value !== user.password) {
-    console.error("Password not matched");
-    return;
-  }
-  auth.signup(user, (success: boolean, msg: string) => {
-    if (success) {
-      // show toast
-      console.log(msg);
-      router.push("/questions");
-    } else {
-      // show toast
-      console.error(msg);
-    }
-  });
-}
-
-function gotoRegister(e: any) {
-  e.preventDefault();
-  router.push("/login");
-}
-</script>
