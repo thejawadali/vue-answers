@@ -1,4 +1,3 @@
-
 <script setup lang="ts">
 import CategoryFlag from "../components/Base/BaseCategoryFlag.vue";
 import BaseAnswer from "../components/Base/BaseAnswer.vue";
@@ -77,7 +76,7 @@ onMounted(() => {
         <!-- Time when question asked -->
         <p class="text-sm text-gray-500">
           Asked by
-          <span class="text-purple-400 cursor-pointer">{{
+          <span class="text-blue-700 cursor-pointer">{{
             question.user.name
           }}</span>
           on {{ dayjs(question.createdAt).format("MMM D, YYYY") }}

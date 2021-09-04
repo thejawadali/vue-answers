@@ -1,8 +1,7 @@
 <template>
   <div
-    :class="`w-${props.wnh} h-${props.wnh}`"
+    :class="`w-${props.wnh} h-${props.wnh} bg-${color}-500`"
     class="
-      bg-blue-500
       w-7
       h-7
       flex
@@ -25,4 +24,5 @@ const props = defineProps({
     default: 7,
   },
 });
+const color = 'blue'
 </script>

@@ -6,17 +6,7 @@
         <!-- title -->
         <h1 class="font-bold cursor-pointer">{{ question.title }}</h1>
         <!-- details -->
-        <p
-          class="
-            truncate
-            cursor-pointer
-            text-gray-500
-            h-5
-            w-100
-            text-sm
-            my-1
-          "
-        >
+        <p class="truncate cursor-pointer text-gray-500 h-5 w-100 text-sm my-1">
           <!-- <p class="cursor-pointer w-20 text-gray-500 h-5 text-sm my-1"> -->
           {{ question.details }}
         </p>
@@ -26,9 +16,7 @@
           <!-- time -->
           <p class="mx-2 text-sm text-gray-500">
             Asked by
-            <span class="text-purple-500">{{
-              question.user.name
-            }}</span>
+            <span class="text-blue-700">{{ question.user.name }}</span>
             {{ timeDifference(question.createdAt) }}
           </p>
           <div v-for="(tag, index) in tags" :key="index" class="mx-2">
