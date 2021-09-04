@@ -1,3 +1,51 @@
+<script setup lang="ts">
+import { onMounted, reactive, ref } from "vue-demi";
+import backIcon from "virtual:vite-icons/mdi/keyboard-backspace";
+import { reloadBrowser } from "../../logic/utils";
+import { questionStore } from "../../store/question";
+import { tagsStore } from "../../store/tag";
+import Multiselect from "@vueform/multiselect";
+
+const store = tagsStore();
+const tags = ref([] as any);
+const newQuestion = reactive({
+  tags: [],
+  title: "",
+  details: "",
+});
+
+onMounted(() => {
+  store.fetchTags((success: boolean, msg: string) => {
+    if (!success) {
+      console.error(msg);
+      return;
+    }
+    tags.value = JSON.parse(msg).map((tag: any) => {
+      return {
+        value: tag._id,
+        label: tag.title,
+      };
+    });
+  });
+});
+
+function submitForm() {
+  questionStore().addQuestion(newQuestion, (success: boolean, msg: string) => {
+    if (!success) {
+      console.error(msg);
+      return;
+    }
+    console.log("Question added");
+    newQuestion.tags = [];
+    newQuestion.title = "";
+    newQuestion.details = "";
+    reloadBrowser("/questions");
+  });
+}
+</script>
+
+
+
 <template>
   <div class="w-full bg-orange-500">
     <form
@@ -21,19 +69,11 @@
         }"
       />
       <label for="title" class="text-md my-1 font-semibold">Title</label>
-      <input
-        class="
-          border border-gray-light
-          focus:border-purple-500
-          px-3
-          py-2
-          rounded-md
-          outline-none
-        "
-        v-model="newQuestion.title"
-        id="title"
-        type="text"
+      <base-input
         placeholder="e.g. How to add two numbers in javascript?"
+        type="text"
+        error-message="Title is required"
+        v-model="newQuestion.title"
       />
       <label class="text-md my-1 font-semibold" for="details"
         >Description</label
@@ -71,56 +111,5 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import { onMounted, reactive, ref } from "vue-demi";
-import backIcon from "virtual:vite-icons/mdi/keyboard-backspace";
-import { reloadBrowser } from "../../logic/utils";
-import { questionStore } from "../../store/question";
-import { tagsStore } from "../../store/tag";
-import Multiselect from "@vueform/multiselect";
-
-const store = tagsStore();
-const tags = ref([] as any);
-const newQuestion = reactive({
-  tags: [],
-  title: "",
-  details: "",
-});
-
-
-
-
-onMounted(() => {
-  store.fetchTags((success: boolean, msg: string) => {
-    if (!success) {
-      console.error(msg);
-      return;
-    }
-    tags.value = JSON.parse(msg).map((tag: any) => {
-      return{
-        value: tag._id,
-        label: tag.title
-      }
-    })
-
-    console.log(tags.value);
-    
-  });
-});
-
-function submitForm() {
-  questionStore().addQuestion(newQuestion, (success: boolean, msg: string) => {
-    if (!success) {
-      console.error(msg);
-      return;
-    }
-    console.log("Question added");
-    newQuestion.tags = [];
-    newQuestion.title = "";
-    newQuestion.details = "";
-    reloadBrowser("/questions");
-  });
-}
-</script>
 
 <style src="@vueform/multiselect/themes/default.css"></style>

@@ -31,20 +31,12 @@
     <template #default>
       <!-- @submit.prevent="submitForm" -->
       <div class="w-full flex flex-col px-5 border-b border-gray-300 pb-8">
-        <label for="title" class="text-md my-2 font-semibold">Title</label>
-        <input
+        <label class="text-md my-2 font-semibold">Title</label>
+        <base-input
           v-model="newTagtitle"
-          class="
-            border border-grey-light
-            focus:border-purple-500
-            px-3
-            py-2
-            rounded-md
-            outline-none
-          "
-          id="title"
           type="text"
           placeholder="e.g. Software"
+          error-message="Tag title is required"
         />
       </div>
     </template>
@@ -59,6 +51,7 @@
             bg-purple-500
             py-2
             rounded-lg
+            focus:outline-none
             text-white
             hover:bg-purple-600
             active:bg-purple-700
@@ -131,6 +124,7 @@ function openTagsModal() {
 }
 
 function createTag() {
+  if (newTagtitle.value === '') return
   const title = newTagtitle.value;
   tStore.createTag(title, (success: boolean, msg: string) => {
     if (success) {
