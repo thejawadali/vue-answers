@@ -1,69 +1,3 @@
-<template>
-  <main class="flex">
-    <!-- side bar -->
-    <Sidebar @createTag="openTagsModal" />
-    <!-- main content i.e. questions list -->
-    <div class="bg-white rounded-md bg-orange-300">
-      <div v-if="questions.length > 0">
-        <base-question
-          v-for="question in questions"
-          :key="question._id"
-          @click="router.push(`/questions/${question._id}`)"
-          :question="question"
-        />
-      </div>
-      <div v-else>
-        <h3>No Question Found</h3>
-      </div>
-    </div>
-  </main>
-  <Modal v-if="open">
-    <!-- title -->
-    <template #title>
-      <div
-        class="flex justify-between items-center p-5 border-b border-gray-300"
-      >
-        <h1 class="text-xl font-bold">Create New Tag</h1>
-        <close-icon @click="open = false" class="cursor-pointer z-50" />
-      </div>
-    </template>
-
-    <template #default>
-      <!-- @submit.prevent="submitForm" -->
-      <div class="w-full flex flex-col px-5 border-b border-gray-300 pb-8">
-        <label class="text-md my-2 font-semibold">Title</label>
-        <base-input
-          v-model="newTagtitle"
-          type="text"
-          placeholder="e.g. Software"
-          error-message="Tag title is required"
-        />
-      </div>
-    </template>
-
-    <!-- Modal actions -->
-    <template #action>
-      <div class="p-4">
-        <button
-          @click="createTag"
-          class="
-            px-4
-            bg-purple-500
-            py-2
-            rounded-lg
-            focus:outline-none
-            text-white
-            hover:bg-purple-600
-            active:bg-purple-700
-          "
-        >
-          Create
-        </button>
-      </div>
-    </template>
-  </Modal>
-</template>
-
 <script lang="ts" setup>
 import { computed, onMounted, ref } from "vue-demi";
 import BaseQuestion from "../../components/Base/BaseQuestion.vue";
@@ -124,7 +58,7 @@ function openTagsModal() {
 }
 
 function createTag() {
-  if (newTagtitle.value === '') return
+  if (newTagtitle.value === "") return;
   const title = newTagtitle.value;
   tStore.createTag(title, (success: boolean, msg: string) => {
     if (success) {
@@ -156,3 +90,70 @@ onMounted(() => {
   });
 });
 </script>
+
+
+<template>
+  <main class="flex">
+    <!-- side bar -->
+    <Sidebar @createTag="openTagsModal" />
+    <!-- main content i.e. questions list -->
+    <div class="bg-white rounded-md bg-orange-300 flex-1 min-h-screen">
+      <div v-if="questions.length > 0">
+        <base-question
+          v-for="question in questions"
+          :key="question._id"
+          @click="router.push(`/questions/${question._id}`)"
+          :question="question"
+        />
+      </div>
+      <div v-else class="mt-4 text-center">
+        <h3 class="text-xl">No Question Found</h3>
+      </div>
+    </div>
+  </main>
+  <Modal v-if="open">
+    <!-- title -->
+    <template #title>
+      <div
+        class="flex justify-between items-center p-5 border-b border-gray-300"
+      >
+        <h1 class="text-xl font-bold">Create New Tag</h1>
+        <close-icon @click="open = false" class="cursor-pointer z-50" />
+      </div>
+    </template>
+
+    <template #default>
+      <!-- @submit.prevent="submitForm" -->
+      <div class="w-full flex flex-col px-5 border-b border-gray-300 pb-8">
+        <label class="text-md my-2 font-semibold">Title</label>
+        <base-input
+          v-model="newTagtitle"
+          type="text"
+          placeholder="e.g. Software"
+          error-message="Tag title is required"
+        />
+      </div>
+    </template>
+
+    <!-- Modal actions -->
+    <template #action>
+      <div class="p-4">
+        <button
+          @click="createTag"
+          class="
+            px-4
+            bg-purple-500
+            py-2
+            rounded-lg
+            focus:outline-none
+            text-white
+            hover:bg-purple-600
+            active:bg-purple-700
+          "
+        >
+          Create
+        </button>
+      </div>
+    </template>
+  </Modal>
+</template>

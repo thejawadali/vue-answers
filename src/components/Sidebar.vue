@@ -1,5 +1,5 @@
 <template>
-  <main class="w-full flex flex-col items-start mx-3 px-4">
+  <main class="w-36 flex flex-col items-start mx-3 px-4">
     <!-- Create Tag button -->
     <button
       @click="$emit('createTag')"
@@ -27,8 +27,11 @@
             :class="{ 'bg-gray-200': selectedTag === tag._id }"
             class="
               w-full
+              focus:outline-none
               py-2
               text-left
+              focus:ring-1
+              focus:ring-purple-500
               px-4
               text-xs text-gray-600
               hover:bg-gray-200
@@ -49,6 +52,9 @@
               text-center text-sm text-purple-500
               font-semibold
               bg-white
+              focus:outline-none
+              focus:ring-1
+              focus:ring-purple-500
               hover:bg-gray-100
               active:bg-gray-200
               shadow-md
