@@ -3,20 +3,22 @@
     <div class="flex w-auth-width flex-col">
       <div class="bg-white px-6 py-8 rounded-md shadow-md text-black w-full">
         <h1 class="mb-8 text-3xl text-center">Login</h1>
-        <base-input 
-        placeholder="Usename"
-        error-message="Username is required"
-        v-model="user.userName"
-        type="text">
+        <base-input
+          placeholder="Usename"
+          error-message="Username is required"
+          v-model="user.userName"
+          type="text"
+        >
         </base-input>
 
-        <base-input 
-        placeholder="Password"
-        error-message="Password of min 8 char is required"
-        v-model="user.password"
-        type="password">
+        <base-input
+          placeholder="Password"
+          error-message="Password of min 8 char is required"
+          v-model="user.password"
+          type="password"
+        >
         </base-input>
-        
+
         <button
           @click="login"
           type="submit"
@@ -46,7 +48,11 @@
         </div>
       </div>
       <div class="text-center mt-4">
-        <a class="text-sm cursor-pointer text-blue-700 underline" @click="$router.push('/questions')">Skip For Now</a>
+        <a
+          class="text-sm cursor-pointer text-blue-700 underline"
+          @click="$router.push('/questions')"
+          >Skip For Now</a
+        >
       </div>
     </div>
   </div>
@@ -55,8 +61,8 @@
 <script lang="ts" setup>
 import { computed, onMounted, reactive } from "vue-demi";
 import { useRouter } from "vue-router";
+import { toast } from "../logic/utils"
 import { userAuth } from "../store/auth";
-
 
 const auth = userAuth();
 
@@ -69,14 +75,18 @@ const router = useRouter();
 
 function login(e: any) {
   e.preventDefault();
-  if (user.userName === '' || user.password === '') return
+  if (user.userName === "" || user.password === "") {
+    toast("Either username or password is empty", "danger")
+    return;
+  }
   auth.login(user, (success: boolean, msg: string) => {
     if (success) {
       // show toast
-      console.log(msg);
+      toast(msg, "success")
       router.push("/questions");
     } else {
       // show toast
+      toast(msg, "danger")
       console.error(msg);
     }
   });
