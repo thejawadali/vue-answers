@@ -3,41 +3,20 @@
     <div class="flex w-auth-width flex-col">
       <div class="bg-white px-6 py-8 rounded-md shadow-md text-black w-full">
         <h1 class="mb-8 text-3xl text-center">Login</h1>
-        <input
-          type="text"
-          class="
-            block
-            border border-grey-light
-            w-full
-            outline-none
-            p-3
-            rounded
-            mb-4
-            focus:border-purple-500
-          "
-          v-model="user.userName"
-          placeholder="Username"
-        />
+        <base-input 
+        placeholder="Usename"
+        error-message="Username is required"
+        v-model="user.userName"
+        type="text">
+        </base-input>
 
-        <input
-          type="password"
-          class="
-            block
-            border border-grey-light
-            w-full
-            outline-none
-            p-3
-            rounded
-            mb-4
-            focus:border-purple-500
-          "
-          v-model="user.password"
-          placeholder="Password"
-        />
-        <!-- <div class="text-right my-2 text-gray-600">
-          <a href="#" class="text-sm hover:underline">Forgot Password?</a>
-        </div> -->
-
+        <base-input 
+        placeholder="Password"
+        error-message="Password is required"
+        v-model="user.password"
+        type="password">
+        </base-input>
+        
         <button
           @click="login"
           type="submit"
@@ -74,9 +53,10 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, reactive } from "vue-demi";
+import { computed, onMounted, reactive } from "vue-demi";
 import { useRouter } from "vue-router";
 import { userAuth } from "../store/auth";
+
 
 const auth = userAuth();
 
@@ -89,6 +69,7 @@ const router = useRouter();
 
 function login(e: any) {
   e.preventDefault();
+  if (user.userName === '' && user.password === '') return
   auth.login(user, (success: boolean, msg: string) => {
     if (success) {
       // show toast
@@ -100,7 +81,6 @@ function login(e: any) {
     }
   });
 }
-
 
 onMounted(() => {
   (user.userName = "user123"), (user.password = "12345678");
